@@ -1,0 +1,9 @@
+﻿.post-content {
+    bottom: 0;
+    left:0;
+    position: absolute;
+}
+
+.thumbnail-with-text {
+    position:relative;
+}

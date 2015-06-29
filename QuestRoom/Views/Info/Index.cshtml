@@ -1,0 +1,24 @@
+﻿@model QuestRoom.Models.Info
+
+@{
+    ViewBag.Title = "Информация";
+}
+
+@foreach (var q in Model.Quests)
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail thumbnail-with-text">
+                <img src="@Url.Content("~/Content/Images/q" + q.Id + ".jpg")" alt="@q.Name">
+                <div class="caption post-content">
+                    <h3>Ярлык эскиза</h3>
+                    <p>Lorem Ipsum</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h3>@q.Name</h3>
+            <p>@q.Description</p>
+        </div>
+    </div>
+}
