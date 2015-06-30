@@ -1,4 +1,10 @@
-﻿@using System.Web.Optimization
+﻿@using System.Threading
+@using System.Web.Optimization
+
+@{
+    var culture = Thread.CurrentThread.CurrentCulture.Name;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +18,44 @@
     }
 </head>
 <body>
-@Html.Partial("_NavMenu")
-@RenderBody()
-@Scripts.Render("~/Scripts/common")
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Quest Rooms</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                @Html.Partial("_NavMenu")
+                
+                <p class="navbar-text navbar-right">
+                    @if (culture == "en-US")
+                    {
+                        <a href="#" class="navbar-link" onclick="setLang('ru'); return false;">РУС</a>
+                        <span>|</span>
+                        <strong>ENG</strong>
+                    }
+                    else
+                    {
+                        <strong>РУС</strong>
+                        <span>|</span>
+                        <a href="#" class="navbar-link"onclick="setLang('en'); return false;">ENG</a>
+                    }
+                </p>
+            </div><!--/.nav-collapse -->
+            
+        </div>
+    </nav>
+    <div class="container" style="padding-top: 80px;">
+        @RenderBody()
+    </div>
+
+
+    
+        @Scripts.Render("~/Scripts/common")
 </body>
 </html>

@@ -9,10 +9,15 @@ namespace QuestRoom
             bundles.Add(new ScriptBundle("~/Scripts/common").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
-                        "~/Scripts/jquery.unobtrusive-ajax.js"));
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/common.js"));
+            
+            /*bundles.Add(new StyleBundle("~/Content/common").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/site.css"));*/
             
             bundles.Add(new StyleBundle("~/Content/common").Include(
-                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-slate.css",
                 "~/Content/site.css"));
         }
     }

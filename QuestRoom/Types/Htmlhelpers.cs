@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -27,6 +28,17 @@ namespace QuestRoom.Types
             return new MvcHtmlString(li.ToString());
 
 
+        }
+
+        public static MvcHtmlString Stars(this HtmlHelper htmlHelper, int count)
+        {
+            var sb = new StringBuilder();
+            
+            for (var i = 0; i < count; i++)
+            {
+                sb.Append("<span class=\"glyphicon glyphicon-star\"></span>");
+            }
+            return new MvcHtmlString(sb.ToString());
         }
     } 
 }

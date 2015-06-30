@@ -1,4 +1,5 @@
-﻿@model QuestRoom.Models.Info
+﻿@using QuestRoom.Types
+@model QuestRoom.Models.Info
 
 @{
     ViewBag.Title = "Информация";
@@ -11,14 +12,53 @@
             <div class="thumbnail thumbnail-with-text">
                 <img src="@Url.Content("~/Content/Images/q" + q.Id + ".jpg")" alt="@q.Name">
                 <div class="caption post-content">
-                    <h3>Ярлык эскиза</h3>
-                    <p>Lorem Ipsum</p>
+                    <table class="blocks-table props-table">
+                        <tr>
+                            <td class="p-name">
+                                @Resources.Strings.Complexity
+                                :
+                            </td>
+                            <td class="p-value">
+                                @Html.Stars(q.Complexity)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-name">
+                                @Resources.Strings.Persons
+                                :
+                            </td>
+                            <td class="p-value">
+                                @q.Persons
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-name">
+                                @Resources.Strings.Duration
+                                :
+                            </td>
+                            <td class="p-value">
+                                @q.Duration.TotalMinutes
+                                @Resources.Strings.Min
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-md-9">
             <h3>@q.Name</h3>
             <p>@q.Description</p>
+            @Html.ActionLink(
+                Resources.Strings.Book, 
+                "Index", 
+                "Booking", 
+                null, 
+                null,
+                "quest" + q.Id,
+                null,
+                new { @class = "btn btn-warning" })
+            
+            @Html.ActionLink(@Resources.Strings.Comments, "Index", "Booking", null,  new { @class = "btn btn-warning" })
         </div>
     </div>
 }

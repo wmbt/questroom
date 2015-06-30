@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Забронировать.
+        /// </summary>
+        internal static string Book {
+            get {
+                return ResourceManager.GetString("Book", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Подарочные сертификаты.
         /// </summary>
         internal static string Certs {
@@ -79,11 +88,56 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Отзывы.
+        /// </summary>
+        internal static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Сложность.
+        /// </summary>
+        internal static string Complexity {
+            get {
+                return ResourceManager.GetString("Complexity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Контакты.
         /// </summary>
         internal static string Contacts {
             get {
                 return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Продолжительность.
+        /// </summary>
+        internal static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как мин..
+        /// </summary>
+        internal static string Min {
+            get {
+                return ResourceManager.GetString("Min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Количество.
+        /// </summary>
+        internal static string Persons {
+            get {
+                return ResourceManager.GetString("Persons", resourceCulture);
             }
         }
         

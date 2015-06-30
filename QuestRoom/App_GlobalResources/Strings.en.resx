@@ -132,4 +132,22 @@
   <data name="Quests" xml:space="preserve">
     <value>Quests</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Book</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Complexity" xml:space="preserve">
+    <value>Complexity</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="Persons" xml:space="preserve">
+    <value>Persons</value>
+  </data>
 </root>

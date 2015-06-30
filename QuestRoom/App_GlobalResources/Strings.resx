@@ -120,11 +120,29 @@
   <data name="About" xml:space="preserve">
     <value>О квестах</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Забронировать</value>
+  </data>
   <data name="Certs" xml:space="preserve">
     <value>Подарочные сертификаты</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Отзывы</value>
+  </data>
+  <data name="Complexity" xml:space="preserve">
+    <value>Сложность</value>
+  </data>
   <data name="Contacts" xml:space="preserve">
     <value>Контакты</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Продолжительность</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>мин.</value>
+  </data>
+  <data name="Persons" xml:space="preserve">
+    <value>Количество</value>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>Квесты</value>
