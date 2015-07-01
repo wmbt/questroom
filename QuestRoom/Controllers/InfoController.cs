@@ -10,7 +10,7 @@ namespace QuestRoom.Controllers
         public ActionResult Index()
         {
             var quests = Provider.GetQuests();
-            return View(new Info { Quests = quests });
+            return View(new InfoViewModel { Quests = quests });
         }
 
         

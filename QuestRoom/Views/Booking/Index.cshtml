@@ -1,1 +1,115 @@
-﻿
+﻿@using QuestRoom.Types
+@model QuestRoom.Models.BookingViewModel
+@{
+    ViewBag.Title = "Расписание";
+}
+<div class="row" style="padding-bottom: 50px;">
+    <div class="col-md-4">
+        @Html.Partial("_Cost", Model.Costs)
+    </div>
+    <div class="col-md-8">
+        <h4 class="booking">@string.Format("{0} {1}", Resources.Strings.BookingOn, Model.SelectedDate.ToString("d MMMM yyyy"))</h4>
+        <h5>@Resources.Strings.SelectDate</h5>
+        <nav>
+            <ul class="pagination">
+                @{
+                    var cls = Model.JumpPrevDate == Model.CurrentMinDate ? "disabled" : string.Empty;
+                }
+                <li class="@cls">
+                    @if (string.IsNullOrEmpty(cls))
+                    {
+                        <a href="@Url.Action("Index", "Booking", new {date = Model.JumpPrevDate.ToString("ddMMyy")}, null)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <span aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </span>
+                    }
+                </li>
+                @for (var date = Model.CurrentMinDate; date <= Model.CurrentMaxDate; date += new TimeSpan(1, 0, 0, 0))
+                {
+                    cls = date == Model.SelectedDate ? "active" : string.Empty;
+                    <li class="@cls">@Html.ActionLink(date.ToString("d MMMM"), "Index", "Booking", new {date = date.ToString("ddMMyy")}, null)</li>
+                }
+                @{
+                    cls = Model.JumpNextDate == Model.CurrentMaxDate ? "disabled" : string.Empty;
+                }
+                <li class="@cls">
+                    @if (string.IsNullOrEmpty(cls))
+                    {
+                        <a href="@Url.Action("Index", "Booking", new {date = Model.JumpNextDate.ToString("ddMMyy")}, null)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <span aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </span>
+                    }
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+@foreach (var b in Model.Bookings)
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail thumbnail-with-text">
+                <img src="@Url.Content("~/Content/Images/q" + b.Quest.Id + ".jpg")" alt="@b.Quest.Name">
+                <div class="caption post-content">
+                    <table class="blocks-table props-table">
+                        <tr>
+                            <td rowspan="3">
+                                <strong>@b.Quest.Name</strong>
+                            </td>
+                            <td class="p-value">
+                                @Html.Stars(b.Quest.Complexity)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-value">
+                                @b.Quest.Persons
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-value">
+                                @b.Quest.Duration.TotalMinutes
+                                @Resources.Strings.Min
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <p>
+                @Resources.Strings.Time
+                :
+            </p>
+            <div class="btn-group">
+                @foreach (var t in b.Schedule)
+                {
+                    @Html.RouteLink(t.BeginTime.ToString("hh\\:mm"), "Confirm", 
+                    new
+                        {
+                            questid = b.Quest.Id,
+                            date = Model.SelectedDate.ToString("ddMMyy"),
+                            time = t.BeginTime.ToString("hhmm")
+                        },
+                    new
+                        {
+                            @class = "btn btn-warning"        
+                        })
+                }
+            </div>
+            <p style="margin-top: 20px;">
+                <a href="#">Подробнее</a>
+            </p>
+        </div>
+    </div>
+}

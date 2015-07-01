@@ -38,3 +38,20 @@
 .p-value {
     width: 30%;   
 }
+table.costs {
+    background: transparent !important;
+}
+table.costs th {
+    padding-bottom: 3px !important;
+    color: #faa123;
+    width: 70px;
+}
+table.costs td {
+    width: 70px;
+}
+table.costs td.first {
+    color: #faa123;
+}
+h4.booking {
+    color: #faa123;
+}

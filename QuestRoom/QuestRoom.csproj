@@ -128,7 +128,6 @@
     <None Include="Areas\Backend\Views\Home\Index.cshtml" />
     <Content Include="Areas\Backend\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Backend\Views\_ViewStart.cshtml" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -167,7 +166,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Info.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\BookingViewModel.cs" />
+    <Compile Include="Models\ConfirmViewModel.cs" />
+    <Compile Include="Models\Cost.cs" />
+    <Compile Include="Models\InfoViewModel.cs" />
+    <Compile Include="Models\Period.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +193,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Info\Index.cshtml" />
     <Content Include="Views\Shared\_NavMenu.cshtml" />
+    <Content Include="Views\Shared\_Cost.cshtml" />
+    <Content Include="Views\Booking\Confirm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

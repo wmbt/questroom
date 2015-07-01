@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Бронирование на.
+        /// </summary>
+        internal static string BookingOn {
+            get {
+                return ResourceManager.GetString("BookingOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Подарочные сертификаты.
         /// </summary>
         internal static string Certs {
@@ -115,11 +124,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Стоимость одной игры.
+        /// </summary>
+        internal static string Cost {
+            get {
+                return ResourceManager.GetString("Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Дата и время.
+        /// </summary>
+        internal static string DateTime {
+            get {
+                return ResourceManager.GetString("DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Продолжительность.
         /// </summary>
         internal static string Duration {
             get {
                 return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как пт.-сб..
+        /// </summary>
+        internal static string FriSat {
+            get {
+                return ResourceManager.GetString("FriSat", resourceCulture);
             }
         }
         
@@ -133,11 +178,119 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как пн.-чт..
+        /// </summary>
+        internal static string MonThru {
+            get {
+                return ResourceManager.GetString("MonThru", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Имя.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Комментарий.
+        /// </summary>
+        internal static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как чел..
+        /// </summary>
+        internal static string Pers {
+            get {
+                return ResourceManager.GetString("Pers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Количество.
         /// </summary>
         internal static string Persons {
             get {
                 return ResourceManager.GetString("Persons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Введите адрес электронной почты.
+        /// </summary>
+        internal static string PhEmail {
+            get {
+                return ResourceManager.GetString("PhEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Введите имя.
+        /// </summary>
+        internal static string PhName {
+            get {
+                return ResourceManager.GetString("PhName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Комментарий (необязательно).
+        /// </summary>
+        internal static string PhNote {
+            get {
+                return ResourceManager.GetString("PhNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Телефон.
+        /// </summary>
+        internal static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Введите номер телефона.
+        /// </summary>
+        internal static string PhPhone {
+            get {
+                return ResourceManager.GetString("PhPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Количество игроков.
+        /// </summary>
+        internal static string Players {
+            get {
+                return ResourceManager.GetString("Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Стоимость.
+        /// </summary>
+        internal static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Квест.
+        /// </summary>
+        internal static string Quest {
+            get {
+                return ResourceManager.GetString("Quest", resourceCulture);
             }
         }
         
@@ -151,11 +304,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как руб..
+        /// </summary>
+        internal static string Rub {
+            get {
+                return ResourceManager.GetString("Rub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Выберите дату:.
+        /// </summary>
+        internal static string SelectDate {
+            get {
+                return ResourceManager.GetString("SelectDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Забронировать.
+        /// </summary>
+        internal static string SendBooking {
+            get {
+                return ResourceManager.GetString("SendBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Расписание.
         /// </summary>
         internal static string Shedule {
             get {
                 return ResourceManager.GetString("Shedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Время.
+        /// </summary>
+        internal static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
             }
         }
     }

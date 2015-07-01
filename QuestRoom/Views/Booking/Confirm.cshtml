@@ -1,0 +1,68 @@
+﻿@using Newtonsoft.Json
+@model QuestRoom.Models.ConfirmViewModel
+@{
+    ViewBag.Title = "Подтверждение бронирования";
+}
+
+<div class="row" style="padding-bottom: 50px;">
+    <div class="col-md-4">
+        @Html.Partial("_Cost", Model.Costs)
+    </div>
+    <div class="col-md-8">
+        <h2 class="booking">
+            @string.Format("{0} {1} {2}", Resources.Strings.BookingOn, Model.SelectedDate.ToString("d MMMM yyyy"), Model.SelectedTime.ToString("hh\\:mm"))
+        </h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form>
+            <div class="form-group col-md-8">
+                <label for="questName">@Resources.Strings.Quest</label>
+                <input id="questName" class="form-control" type="text" value="@Model.Quest.Name" readonly="readonly">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="dateTime">@Resources.Strings.DateTime</label>
+                @{
+                    var dt = Model.SelectedDate + Model.SelectedTime;
+                }
+                <input id="dateTime" class="form-control" type="text" value="@dt.ToString("g")" readonly="readonly">
+            </div>
+            <div class="form-group col-md-8">
+                <label for="personsCount">@Resources.Strings.Players</label>
+                <select id="personsCount" class="form-control">
+                    @foreach (var c in Model.Costs)
+                    {
+                        <option value="@c.Id">@c.Persons</option>
+                    }
+                </select>
+                <script type="text/javascript">
+                    var costs = @Html.Raw(JsonConvert.SerializeObject(Model.Costs));
+                </script>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="cost">@Resources.Strings.Price</label>
+                <input id="cost" class="form-control" type="text" value="" readonly="readonly">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="playerName">@Resources.Strings.Name</label>
+                <input id="playerName" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhName">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="playerPhone">@Resources.Strings.Phone</label>
+                <input id="playerPhone" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhPhone">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="playerEmail">@Resources.Strings.Email</label>
+                <input id="playerEmail" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhEmail">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="comment">@Resources.Strings.Comments</label>
+                <input id="comment" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhNote">
+            </div>
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-warning">@Resources.Strings.SendBooking</button>
+            </div>
+        </form>
+    </div>
+</div>

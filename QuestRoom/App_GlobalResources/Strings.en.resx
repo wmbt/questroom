@@ -150,4 +150,67 @@
   <data name="Persons" xml:space="preserve">
     <value>Persons</value>
   </data>
+  <data name="FriSat" xml:space="preserve">
+    <value>Fr.-Sa.</value>
+  </data>
+  <data name="MonThru" xml:space="preserve">
+    <value>Mo.-Th.</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Pers" xml:space="preserve">
+    <value>pers.</value>
+  </data>
+  <data name="Rub" xml:space="preserve">
+    <value>rub.</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Select date:</value>
+  </data>
+  <data name="BookingOn" xml:space="preserve">
+    <value>Booking on</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="PhEmail" xml:space="preserve">
+    <value>Enter email</value>
+  </data>
+  <data name="PhName" xml:space="preserve">
+    <value>Enter name</value>
+  </data>
+  <data name="PhNote" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PhPhone" xml:space="preserve">
+    <value>Enter phone</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Quest" xml:space="preserve">
+    <value>Quest</value>
+  </data>
+  <data name="SendBooking" xml:space="preserve">
+    <value>Book</value>
+  </data>
 </root>

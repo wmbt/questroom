@@ -123,6 +123,9 @@
   <data name="Book" xml:space="preserve">
     <value>Забронировать</value>
   </data>
+  <data name="BookingOn" xml:space="preserve">
+    <value>Бронирование на</value>
+  </data>
   <data name="Certs" xml:space="preserve">
     <value>Подарочные сертификаты</value>
   </data>
@@ -135,19 +138,79 @@
   <data name="Contacts" xml:space="preserve">
     <value>Контакты</value>
   </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Стоимость одной игры</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Дата и время</value>
+  </data>
   <data name="Duration" xml:space="preserve">
     <value>Продолжительность</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FriSat" xml:space="preserve">
+    <value>пт.-сб.</value>
   </data>
   <data name="Min" xml:space="preserve">
     <value>мин.</value>
   </data>
+  <data name="MonThru" xml:space="preserve">
+    <value>пн.-чт.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Pers" xml:space="preserve">
+    <value>чел.</value>
+  </data>
   <data name="Persons" xml:space="preserve">
     <value>Количество</value>
+  </data>
+  <data name="PhEmail" xml:space="preserve">
+    <value>Введите адрес электронной почты</value>
+  </data>
+  <data name="PhName" xml:space="preserve">
+    <value>Введите имя</value>
+  </data>
+  <data name="PhNote" xml:space="preserve">
+    <value>Комментарий (необязательно)</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="PhPhone" xml:space="preserve">
+    <value>Введите номер телефона</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Количество игроков</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="Quest" xml:space="preserve">
+    <value>Квест</value>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>Квесты</value>
   </data>
+  <data name="Rub" xml:space="preserve">
+    <value>руб.</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Выберите дату:</value>
+  </data>
+  <data name="SendBooking" xml:space="preserve">
+    <value>Забронировать</value>
+  </data>
   <data name="Shedule" xml:space="preserve">
     <value>Расписание</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Время</value>
   </data>
 </root>

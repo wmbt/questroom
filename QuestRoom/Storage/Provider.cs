@@ -30,6 +30,32 @@ namespace QuestRoom.Storage
             return items.ToArray();
         }
 
+        public Quest GetQuest(int questId)
+        {
+            const string query = "SELECT Id, Name__ as Name, Complexity, Duration, Persons, " +
+                             "Description__ as Description, Visible, Active, Note from Quests where Id = @Id";
+
+            var item = GetItems(query, new SqlParameter("@Id", questId), x => new Quest(x)).Single();
+
+            return item;
+        }
+
+        public Period[] GetPeriods(int questId)
+        {
+            const string query = "select * from schedule where QuestId = @QuestId order by BeginTime";
+            var items = GetItems(query, new SqlParameter("@QuestId", questId), x => new Period(x));
+
+            return items.ToArray();
+        }
+
+        public Cost[] GetCosts()
+        {
+            const string query = "select * from Cost order by Id";
+            var items = GetItems(query, x => new Cost(x));
+
+            return items.ToArray();
+        }
+
 
 
         private IEnumerable<T> GetItems<T>(string commandText, Func<IDataRecord, T> itemFactory)

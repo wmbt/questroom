@@ -5,7 +5,7 @@ using System.Web;
 
 namespace QuestRoom.Models
 {
-    public class Info
+    public class InfoViewModel
     {
         public Quest[] Quests { get; set; }
     }
