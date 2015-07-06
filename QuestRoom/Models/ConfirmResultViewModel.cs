@@ -5,7 +5,7 @@ using System.Web;
 
 namespace QuestRoom.Models
 {
-    public class InfoPanelViewModel
+    public class ConfirmResultViewModel
     {
         public string Title { get; set; }
         public string Message { get; set; }

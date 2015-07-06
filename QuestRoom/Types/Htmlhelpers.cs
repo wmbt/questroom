@@ -10,19 +10,19 @@ namespace QuestRoom.Types
 {
     public static class HtmlHelpers
     {
-
         public static MvcHtmlString MenuLink(this HtmlHelper htmlHelper,
                                             string linkText,
                                             string actionName,
-                                            string controllerName
+                                            string controllerName,
+                                            string route = "Default"
                                             )
         {
 
             var currentAction = htmlHelper.ViewContext.RouteData.GetRequiredString("action");
             var currentController = htmlHelper.ViewContext.RouteData.GetRequiredString("controller");
             //var li = new TagBuilder("li") { InnerHtml = htmlHelper.ActionLink(linkText, actionName, controllerName, new{}, new{}).ToHtmlString() };
-            
-            var li = new TagBuilder("li") { InnerHtml = htmlHelper.RouteLink(linkText, "Default", new { action = actionName, controller = controllerName }).ToHtmlString() };
+
+            var li = new TagBuilder("li") { InnerHtml = htmlHelper.RouteLink(linkText, route, new { action = actionName, controller = controllerName }).ToHtmlString() };
 
             if (actionName.ToLower() == currentAction.ToLower() && string.Equals(controllerName, currentController, StringComparison.CurrentCultureIgnoreCase))
                 li.AddCssClass("active");

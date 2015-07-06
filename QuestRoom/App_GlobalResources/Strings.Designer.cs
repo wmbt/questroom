@@ -88,6 +88,60 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Указанные дата и время уже заняты.
+        /// </summary>
+        internal static string BookingBookedMessage {
+            get {
+                return ResourceManager.GetString("BookingBookedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Бронирование не выполнено.
+        /// </summary>
+        internal static string BookingBookedTitle {
+            get {
+                return ResourceManager.GetString("BookingBookedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как В течении часа с вами свяжется оператор и подтвердит бронь.
+        /// </summary>
+        internal static string BookingCompleteMessage {
+            get {
+                return ResourceManager.GetString("BookingCompleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Бронирование выполнено.
+        /// </summary>
+        internal static string BookingCompleteTitle {
+            get {
+                return ResourceManager.GetString("BookingCompleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Указанные дата и время недопустимы.
+        /// </summary>
+        internal static string BookingFailureMessage {
+            get {
+                return ResourceManager.GetString("BookingFailureMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Бронирование невозможно.
+        /// </summary>
+        internal static string BookingFailureTitle {
+            get {
+                return ResourceManager.GetString("BookingFailureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Бронирование на.
         /// </summary>
         internal static string BookingOn {
@@ -151,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Подробнее.
+        /// </summary>
+        internal static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Продолжительность.
         /// </summary>
         internal static string Duration {
@@ -178,11 +241,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Отзыв могут оставить только пользователи, учавствовавшие в игре. По вашему почтовому адресу не найдена подтвержденная бронь.
+        /// </summary>
+        internal static string FeedbackMessageFailureMessage {
+            get {
+                return ResourceManager.GetString("FeedbackMessageFailureMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Невозможно оставить отзыв.
+        /// </summary>
+        internal static string FeedbackMessageFailureTitle {
+            get {
+                return ResourceManager.GetString("FeedbackMessageFailureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Добавление отзыва.
         /// </summary>
         internal static string FeedbackMessageForm {
             get {
                 return ResourceManager.GetString("FeedbackMessageForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Отзыв успешно отправлен.
+        /// </summary>
+        internal static string FeedbackMessageSuccessTitle {
+            get {
+                return ResourceManager.GetString("FeedbackMessageSuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Ваш отзыв успешно отправлен и будет опубликован после модерации.
+        /// </summary>
+        internal static string FeedbackMessagSuccessMessage {
+            get {
+                return ResourceManager.GetString("FeedbackMessagSuccessMessage", resourceCulture);
             }
         }
         
@@ -201,6 +300,42 @@ namespace Resources {
         internal static string FriSat {
             get {
                 return ResourceManager.GetString("FriSat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Вернуться к бронированию.
+        /// </summary>
+        internal static string GotoBooking {
+            get {
+                return ResourceManager.GetString("GotoBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Войти.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Неверное имя пользователя или пароль.
+        /// </summary>
+        internal static string LoginFailure {
+            get {
+                return ResourceManager.GetString("LoginFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Авторизация.
+        /// </summary>
+        internal static string LoginPage {
+            get {
+                return ResourceManager.GetString("LoginPage", resourceCulture);
             }
         }
         
@@ -237,6 +372,15 @@ namespace Resources {
         internal static string Note {
             get {
                 return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Пароль.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
@@ -399,6 +543,15 @@ namespace Resources {
         internal static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Имя пользователя.
+        /// </summary>
+        internal static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
             }
         }
     }

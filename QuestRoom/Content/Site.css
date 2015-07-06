@@ -15,7 +15,6 @@
     color: black !important;   
 }
 
-}
 .blocks-table {
             border: none;
             border-spacing: 0px;
@@ -58,4 +57,14 @@ h4.booking {
 
 .form-control-feedback {
     right: 15px;
+}
+
+.panel-heading  {
+    color: black !important;
+}
+.panel-heading h3 {
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.2) !important;
+}
+.feedback-button {
+    margin-top: 20px;
 }

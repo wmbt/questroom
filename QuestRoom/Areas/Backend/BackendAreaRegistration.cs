@@ -15,9 +15,10 @@ namespace QuestRoom.Areas.Backend
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Backend_default",
-                "Backend/{controller}/{action}",
-                new { controler = "Home", action = "Index" }
+                "Backend",
+                "backend/{action}",
+                new { controller = "Home", action = "Bookings" },
+                namespaces: new[] { "QuestRoom.Areas.Backend.Controllers" }
             );
         }
     }

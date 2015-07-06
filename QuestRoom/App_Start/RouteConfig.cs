@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using System.Xml.XPath;
 
 namespace QuestRoom
 {
@@ -8,6 +9,24 @@ namespace QuestRoom
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "Login",
+                url: "login",
+                defaults: new { controller = "Account", action = "Login" }
+            );
+            routes.MapRoute(
+                name: "Logout",
+                url: "logout",
+                defaults: new { controller = "Account", action = "Logout" }
+            );
+
+            /*routes.MapRoute(
+                name: "Backend",
+                url: "backend/{action}",
+                defaults: new { controller = "Home", action = "Bookings" },
+                namespaces: new[] { "QuestRoom.Areas.Backend.Controllers" }
+            );*/
 
             routes.MapRoute(
                 name: "Booking",

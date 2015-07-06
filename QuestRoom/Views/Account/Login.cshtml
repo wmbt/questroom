@@ -1,6 +1,46 @@
-﻿@Model User
-@{ 
-    ViewBag.Title = "Авторизация";
+﻿@using System.Web.Optimization
+@model QuestRoom.Models.LoginViewModel
+@{
+    ViewBag.Title = @Resources.Strings.LoginPage;
+    Layout = "";
 }
-<h2>Login</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/common")
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-4 col-md-offset-4">
+            <h4 class="text-center" style="margin-bottom: 20px;">@Resources.Strings.LoginPage</h4>
+            @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }))
+            {
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(x => x.Username, Resources.Strings.Username)
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(x => x.Password, Resources.Strings.Password)
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                </div>
+                if (Model.Incorrect)
+                {
+                    <div class="form-group col-md-12">
+                        <span>@Resources.Strings.LoginFailure</span>
+                    </div>
+                }
+                <div class="form-group col-md-12" style="padding-top: 20px;">
+                    <button type="submit" class="btn btn-warning">@Resources.Strings.Login</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+    @Scripts.Render("~/Scripts/common")
+</body>
+</html>
 

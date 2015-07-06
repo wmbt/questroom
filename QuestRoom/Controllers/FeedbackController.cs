@@ -39,13 +39,15 @@ namespace QuestRoom.Controllers
             {
                 return View("AddMessageResult", new FeedbackMessageResultViewModel
                 {
-                    
+                    Title = Resources.Strings.FeedbackMessageFailureTitle,
+                    Message = Resources.Strings.FeedbackMessageFailureMessage
                 });
             }
 
             return View("AddMessageResult", new FeedbackMessageResultViewModel
             {
-                
+                Title = Resources.Strings.FeedbackMessageSuccessTitle,
+                Message = Resources.Strings.FeedbackMessagSuccessMessage
             });
         }
     }

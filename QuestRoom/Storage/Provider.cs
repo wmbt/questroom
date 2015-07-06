@@ -26,6 +26,15 @@ namespace QuestRoom.Storage
             ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ConnectionString;
         }
 
+        public User GetUser(string login, string password)
+        {
+            const string query = "select * from Users u where lower(u.Login) = lower(@Login) and u.Password = @Password";
+            var item = GetItems(query,
+                new[] {new SqlParameter("@Login", login), new SqlParameter("@Password", password)}, x => new User(x));
+            
+            return item.SingleOrDefault();
+        }
+
         public Quest[] GetQuests()
         {
             const string query = "SELECT Id, Name__ as Name, Complexity, Duration, Persons, " +
@@ -46,10 +55,17 @@ namespace QuestRoom.Storage
             return item;
         }
 
-        public Period[] GetPeriods(int questId)
+        public Period[] GetPeriods(int questId, DateTime questDate)
         {
-            const string query = "select * from schedule where QuestId = @QuestId order by BeginTime";
-            var items = GetItems(query, new SqlParameter("@QuestId", questId), x => new Period(x));
+            const string query = "select s.*, " +
+                                        "(SELECT CAST( " +
+                                           "CASE WHEN EXISTS(SELECT * FROM Bookings b " +
+                                                "where cast(b.Date as date) = @QuestDate " +
+                                                "and b.Status in (0, 1) and cast(b.Date as time) = s.BeginTime) " +
+                                        "THEN 1 ELSE 0 END AS BIT)) Booked " +
+                                    "from schedule s where QuestId = @QuestId order by BeginTime";
+            
+            var items = GetItems(query, new[] {new SqlParameter("@QuestId", questId), new SqlParameter("@QuestDate", questDate)}, x => new Period(x));
 
             return items.ToArray();
         }
@@ -146,7 +162,7 @@ namespace QuestRoom.Storage
         public bool AddFeedbackMessage(int questId, string email, string text)
         {
             const string isUserPlayingQuery =
-                "select count(*) from Bookings  where lower(Email) = lower(@Email) and Status = 1 and Date < sysdate()";
+                "select count(*) from Bookings  where lower(Email) = lower(@Email) and Status = 1 and Date < getdate()";
 
             var userCompleteGamesCount = (int)GetScalar(isUserPlayingQuery, new SqlParameter("@Email", email));
             if (userCompleteGamesCount == 0)

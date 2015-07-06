@@ -1,4 +1,5 @@
-﻿@using QuestRoom.Types
+﻿@using System.Collections
+@using QuestRoom.Types
 @model QuestRoom.Models.BookingViewModel
 @{
     ViewBag.Title = "Расписание";
@@ -94,21 +95,33 @@
             <div class="btn-group">
                 @foreach (var t in b.Schedule)
                 {
-                    @Html.RouteLink(t.BeginTime.ToString("hh\\:mm"), "Confirm", 
-                    new
+                    var attrs = new Dictionary<string, object> { { "class", "btn btn-warning" } };
+                    var text = t.BeginTime.ToString("hh\\:mm");
+                    
+                    
+                    if (t.Booked) { attrs.Add("disabled", "disabled"); }
+
+                    if (!t.Booked)
+                    {
+                        var routeValues = new RouteValueDictionary
                         {
-                            questid = b.Quest.Id,
-                            date = Model.SelectedDate.ToString("ddMMyy"),
-                            time = t.BeginTime.ToString("hhmm")
-                        },
-                    new
-                        {
-                            @class = "btn btn-warning"        
-                        })
+                            {"questId", b.Quest.Id},
+                            {"date", Model.SelectedDate.ToString("ddMMyy")},
+                            {"time", t.BeginTime.ToString("hhmm")}
+                        };
+
+                        @Html.RouteLink(text, "Confirm", routeValues, attrs)
+
+                    }
+                    else
+                    {
+                        <span class="btn btn-warning disabled">@text</span>
+                    }
                 }
+                
             </div>
             <p style="margin-top: 20px;">
-                <a href="#">Подробнее</a>
+                @Html.ActionLink(Resources.Strings.Details, "Index", "Info")
             </p>
         </div>
     </div>

@@ -22,17 +22,17 @@ namespace QuestRoom.Controllers
             switch (checkResult)
             {
                 case ProcessBookingStatus.Booked:
-                    return View("InfoPanel", new InfoPanelViewModel
+                    return View("ConfirmResult", new ConfirmResultViewModel
                     {
-                        Title = "Бронирование не выполнено",
-                        Message = "Указанные дата и время уже заняты",
+                        Title = Resources.Strings.BookingBookedTitle,
+                        Message = Resources.Strings.BookingBookedMessage,
                         ShowLinkToSchedule = true
                     });
                 case ProcessBookingStatus.NotExist:
-                    return View("InfoPanel", new InfoPanelViewModel
+                    return View("ConfirmResult", new ConfirmResultViewModel
                     {
-                        Title = "Бронирование невозможно",
-                        Message = "Указанные дата и время недопустимы",
+                        Title = Resources.Strings.BookingFailureTitle,
+                        Message = Resources.Strings.BookingFailureMessage,
                         ShowLinkToSchedule = false
                     });
                 default:
@@ -66,24 +66,24 @@ namespace QuestRoom.Controllers
             switch (result)
             {
                 case ProcessBookingStatus.Booked:
-                    return View("InfoPanel", new InfoPanelViewModel
+                    return View("ConfirmResult", new ConfirmResultViewModel
                     {
-                        Title = "Бронирование не выполнено",
-                        Message = "Указанные дата и время уже заняты",
+                        Title = Resources.Strings.BookingBookedTitle,
+                        Message = Resources.Strings.BookingBookedMessage,
                         ShowLinkToSchedule = true
                     });
                 case ProcessBookingStatus.NotExist:
-                    return View("InfoPanel", new InfoPanelViewModel
+                    return View("ConfirmResult", new ConfirmResultViewModel
                     {
-                        Title = "Бронирование невозможно",
-                        Message = "Указанные дата и время недопустимы",
+                        Title = Resources.Strings.BookingFailureTitle,
+                        Message = Resources.Strings.BookingFailureMessage,
                         ShowLinkToSchedule = false
                     });
                 default:
-                    return View("InfoPanel", new InfoPanelViewModel
+                    return View("ConfirmResult", new ConfirmResultViewModel
                     {
-                        Title = "Бронирование выполнено",
-                        Message = "В течении часа с вами свяжется оператор и подтвердит бронь",
+                        Title = Resources.Strings.BookingCompleteTitle,
+                        Message = Resources.Strings.BookingCompleteMessage,
                         ShowLinkToSchedule = false
                     });
             }
@@ -147,7 +147,7 @@ namespace QuestRoom.Controllers
             var costs = Provider.GetCosts();
 
             var bookings = (from q in quests
-                let periods = Provider.GetPeriods(q.Id)
+                let periods = Provider.GetPeriods(q.Id, selectedDate)
                 select new Booking
                 {
                     Quest = q, Schedule = periods
