@@ -132,6 +132,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\feedback.js" />
+    <Content Include="Scripts\confirm.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -162,6 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -170,6 +173,10 @@
     <Compile Include="Models\BookingViewModel.cs" />
     <Compile Include="Models\ConfirmViewModel.cs" />
     <Compile Include="Models\Cost.cs" />
+    <Compile Include="Models\FeedbackMessage.cs" />
+    <Compile Include="Models\FeedbackMessageResultViewModel.cs" />
+    <Compile Include="Models\FeedbackMessageViewModel.cs" />
+    <Compile Include="Models\InfoPanelViewModel.cs" />
     <Compile Include="Models\InfoViewModel.cs" />
     <Compile Include="Models\Period.cs" />
     <Compile Include="Models\Quest.cs" />
@@ -180,6 +187,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Types\BookingStatus.cs" />
+    <Compile Include="Types\ProcessBookingStatus.cs" />
     <Compile Include="Types\Extensions.cs" />
     <Compile Include="Storage\Provider.cs" />
     <Compile Include="Types\HtmlHelpers.cs" />
@@ -195,6 +204,10 @@
     <Content Include="Views\Shared\_NavMenu.cshtml" />
     <Content Include="Views\Shared\_Cost.cshtml" />
     <Content Include="Views\Booking\Confirm.cshtml" />
+    <Content Include="Views\Booking\ConfirmResult.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\Feedback\AddMessageResult.cshtml" />
+    <Content Include="Views\Feedback\AddMessage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -236,7 +249,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56386</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55946/</IISUrl>
+          <IISUrl>http://localhost:56386/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

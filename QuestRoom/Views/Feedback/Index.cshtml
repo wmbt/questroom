@@ -1,0 +1,21 @@
+﻿@model QuestRoom.Models.FeedbackMessage[]
+@{
+    ViewBag.Title = @Resources.Strings.Feedback;
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>@Resources.Strings.Feedback</h2>
+        @Html.ActionLink(Resources.Strings.AddFeedbackMessage, "AddMessage", null, new {@class = "btn btn-warning pull-right"})
+    </div>
+</div>
+@foreach (var m in Model)
+{
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>@m.QuestName</h2>
+            <h5>@string.Format("{0}, {1}", m.PlayerName, m.Created)</h5>
+            <p>@m.Text</p>
+        </div>
+    </div>
+}

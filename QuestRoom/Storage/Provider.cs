@@ -6,12 +6,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using QuestRoom.Models;
+using QuestRoom.Types;
 
 namespace QuestRoom.Storage
 {
     public class Provider
     {
         public const string EngCulturePostfix = "Eng";
+        private const string IsCorrectQuery = "select count(*) from Schedule where QuestId = @QuestId and BeginTime = @BeginTime";
+        private const string IsFreeQuery = "select count(*) from Schedule t " +
+                                           "where t.QuestId = @QuestId and t.BeginTime = cast(@DateTime as time) " +
+                                           "and not exists(select * from Bookings b " +
+                                           "where b.QuestId = @QuestId and b.Date = @DateTime and b.Status in (0, 1))";
 
         private static readonly string ConnectionString;
 
@@ -56,7 +62,104 @@ namespace QuestRoom.Storage
             return items.ToArray();
         }
 
+        public ProcessBookingStatus CheckBooking(int questId, DateTime bookingDateTime)
+        {
+            var count1 = (int)GetScalar(IsCorrectQuery,
+                new[]
+                {new SqlParameter("@QuestId", questId), new SqlParameter("@BeginTime", bookingDateTime.TimeOfDay)});
 
+            if (count1 == 0) 
+                return ProcessBookingStatus.NotExist;
+
+            var count2 = (int)GetScalar(IsFreeQuery,
+                new[] { new SqlParameter("@QuestId", questId), new SqlParameter("@DateTime", bookingDateTime) });
+
+            return count2 > 0 ? ProcessBookingStatus.Free : ProcessBookingStatus.Booked;
+        }
+
+        public ProcessBookingStatus SaveBooking(int questId,
+                                                DateTime bookingDateTime, 
+                                                int costId,
+                                                string name, 
+                                                string phone, 
+                                                string email, 
+                                                string comments)
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                var trn = conn.BeginTransaction(IsolationLevel.Serializable);
+                var isCorrectCommand = new SqlCommand(IsCorrectQuery, conn, trn);
+                isCorrectCommand.Parameters.AddRange(new[]
+                {
+                    new SqlParameter("@QuestId", questId),
+                    new SqlParameter("@BeginTime", bookingDateTime.TimeOfDay)
+                });
+
+                var existsTimeCount = (int) isCorrectCommand.ExecuteScalar();
+                if (existsTimeCount == 0)
+                    return ProcessBookingStatus.NotExist;
+
+                var isTimeFreeCommand = new SqlCommand(IsFreeQuery, conn, trn);
+                isTimeFreeCommand.Parameters.AddRange(new[]
+                {
+                    new SqlParameter("@QuestId", questId),
+                    new SqlParameter("@DateTime", bookingDateTime)
+                });
+
+                var freeTimeCount = (int) isTimeFreeCommand.ExecuteScalar();
+                if (freeTimeCount == 0)
+                    return ProcessBookingStatus.Booked;
+
+                const string query =
+                    "insert into Bookings(QuestId, Date, CostId, PlayerName, Email, Phone, Comment) values(@QuestId, @Date, @CostId, @PlayerName, @Email, @Phone, @Comment)";
+                var addBookingCommand = new SqlCommand(query, conn, trn);
+                addBookingCommand.Parameters.AddRange(new[]
+                {
+                    new SqlParameter("@QuestId", questId),
+                    new SqlParameter("@Date", bookingDateTime),
+                    new SqlParameter("@CostId", costId),
+                    new SqlParameter("@PlayerName", name),
+                    new SqlParameter("@Email", email),
+                    new SqlParameter("@Phone", phone),
+                    new SqlParameter("@Comment", comments)
+                });
+                addBookingCommand.ExecuteNonQuery();
+                trn.Commit();
+                return ProcessBookingStatus.Complete;
+            }
+        }
+
+        public FeedbackMessage[] GetFeedbackMessages()
+        {
+            const string query = "select f.Id, q.Id as QuestId, q.Name__ as QuestName, f.Created, " +
+                                 "(select top(1) b.PlayerName from Bookings b where lower(b.Email) = lower(f.Email)) PlayerName, " +
+                                 "f.Text " +
+                                 "from [Feedback] f, Quests q " +
+                                 "where f.QuestId = q.Id and f.Status = 1 " +
+                                 "order by f.Created desc";
+
+            var items = GetItems(query, x => new FeedbackMessage(x));
+            return items.ToArray();
+        }
+
+        public bool AddFeedbackMessage(int questId, string email, string text)
+        {
+            const string isUserPlayingQuery =
+                "select count(*) from Bookings  where lower(Email) = lower(@Email) and Status = 1 and Date < sysdate()";
+
+            var userCompleteGamesCount = (int)GetScalar(isUserPlayingQuery, new SqlParameter("@Email", email));
+            if (userCompleteGamesCount == 0)
+                return false;
+            const string addMessageQuery = "INSERT INTO Feedback(QuestId, Email, Text) values(@QuestId, @Email, @Text)";
+            ExecuteNonQuery(addMessageQuery, new[]
+            {
+                new SqlParameter("@QuestId", questId),
+                new SqlParameter("@Email", email),
+                new SqlParameter("@Text", text)
+            });
+            return true;
+        }
 
         private IEnumerable<T> GetItems<T>(string commandText, Func<IDataRecord, T> itemFactory)
         {
@@ -93,6 +196,42 @@ namespace QuestRoom.Storage
                 conn.Close();
             }
 
+        }
+
+        private static object GetScalar(string commandText, SqlParameter parameter)
+        {
+            return GetScalar(commandText, new[] {parameter});
+        }
+
+        private static object GetScalar(string commandText, IEnumerable<SqlParameter> parameters = (IEnumerable<SqlParameter>)null)
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            using (var command = new SqlCommand(commandText, conn))
+            {
+                if (parameters != null)
+                    command.Parameters.AddRange(parameters.ToArray());
+                conn.Open();
+                var result = command.ExecuteScalar();
+                return result;
+            }
+        }
+
+        private static int ExecuteNonQuery(string commandText, SqlParameter parameter)
+        {
+            return ExecuteNonQuery(commandText, new[] {parameter});
+        }
+
+        private static int ExecuteNonQuery(string commandText, IEnumerable<SqlParameter> parameters = null)
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            using (var command = new SqlCommand(commandText, conn))
+            {
+                if (parameters != null)
+                    command.Parameters.AddRange(parameters.ToArray());
+                conn.Open();
+                var result = command.ExecuteNonQuery();
+                return result;
+            }
         }
 
         private static string WritePostfix(string query)

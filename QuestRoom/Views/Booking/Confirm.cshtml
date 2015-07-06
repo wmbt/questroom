@@ -1,4 +1,5 @@
-﻿@using Newtonsoft.Json
+﻿@using System.Web.Optimization
+@using Newtonsoft.Json
 @model QuestRoom.Models.ConfirmViewModel
 @{
     ViewBag.Title = "Подтверждение бронирования";
@@ -16,7 +17,8 @@
 </div>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form>
+        @using (Html.BeginForm("Confirm", "Booking", FormMethod.Post, new {onsubmit = "return vaidateForm()"}))
+        {
             <div class="form-group col-md-8">
                 <label for="questName">@Resources.Strings.Quest</label>
                 <input id="questName" class="form-control" type="text" value="@Model.Quest.Name" readonly="readonly">
@@ -29,40 +31,40 @@
                 <input id="dateTime" class="form-control" type="text" value="@dt.ToString("g")" readonly="readonly">
             </div>
             <div class="form-group col-md-8">
-                <label for="personsCount">@Resources.Strings.Players</label>
-                <select id="personsCount" class="form-control">
-                    @foreach (var c in Model.Costs)
-                    {
-                        <option value="@c.Id">@c.Persons</option>
-                    }
-                </select>
+                @Html.LabelFor(x => x.Price, Resources.Strings.Players)
+                @Html.DropDownListFor(x => x.Price, Model.Prices, new {@class = "form-control"})
                 <script type="text/javascript">
-                    var costs = @Html.Raw(JsonConvert.SerializeObject(Model.Costs));
+                    var costs = @Html.Raw(JsonConvert.SerializeObject(Model.Prices));
                 </script>
             </div>
             <div class="form-group col-md-4">
                 <label for="cost">@Resources.Strings.Price</label>
                 <input id="cost" class="form-control" type="text" value="" readonly="readonly">
             </div>
-            <div class="form-group col-md-12">
-                <label for="playerName">@Resources.Strings.Name</label>
-                <input id="playerName" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhName">
+            <div class="form-group col-md-12 has-feedback">
+                @Html.LabelFor(x => x.PlayerName, Resources.Strings.Name)
+                @Html.TextBoxFor(x => x.PlayerName, new { @class = "form-control", placeholder = Resources.Strings.PhName })
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
             </div>
-            <div class="form-group col-md-12">
-                <label for="playerPhone">@Resources.Strings.Phone</label>
-                <input id="playerPhone" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhPhone">
+            <div class="form-group col-md-12 has-feedback">
+                @Html.LabelFor(x => x.Phone, Resources.Strings.Phone)
+                @Html.TextBoxFor(x => x.Phone, new {@class = "form-control", placeholder = Resources.Strings.PhPhone})
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
             </div>
-            <div class="form-group col-md-12">
-                <label for="playerEmail">@Resources.Strings.Email</label>
-                <input id="playerEmail" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhEmail">
+            <div class="form-group col-md-12 has-feedback">
+                @Html.LabelFor(x => x.Email, Resources.Strings.Email)
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = Resources.Strings.PhEmail })
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
             </div>
-            <div class="form-group col-md-12">
-                <label for="comment">@Resources.Strings.Comments</label>
-                <input id="comment" class="form-control" type="text" value="" placeholder="@Resources.Strings.PhNote">
+            <div class="form-group col-md-12 has-feedback">
+                @Html.LabelFor(x => x.Note, Resources.Strings.Comments)
+                @Html.TextBoxFor(x => x.Note, new {@class = "form-control", placeholder = Resources.Strings.PhNote})
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
             </div>
             <div class="form-group col-md-12">
                 <button type="submit" class="btn btn-warning">@Resources.Strings.SendBooking</button>
             </div>
-        </form>
+        }
     </div>
 </div>
+@Scripts.Render("~/Scripts/confirm")

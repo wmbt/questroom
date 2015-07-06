@@ -11,7 +11,10 @@ namespace QuestRoom
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js",
                         "~/Scripts/common.js"));
-            
+            bundles.Add(new ScriptBundle("~/Scripts/confirm").Include(
+                "~/Scripts/confirm.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/feedback").Include(
+                "~/Scripts/feedback.js"));
             /*bundles.Add(new StyleBundle("~/Content/common").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));*/

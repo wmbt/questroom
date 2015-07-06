@@ -55,3 +55,7 @@ table.costs td.first {
 h4.booking {
     color: #faa123;
 }
+
+.form-control-feedback {
+    right: 15px;
+}

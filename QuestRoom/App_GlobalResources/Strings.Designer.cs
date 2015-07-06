@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Добавить отзыв.
+        /// </summary>
+        internal static string AddFeedbackMessage {
+            get {
+                return ResourceManager.GetString("AddFeedbackMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Забронировать.
         /// </summary>
         internal static string Book {
@@ -160,6 +169,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Отзывы.
+        /// </summary>
+        internal static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Добавление отзыва.
+        /// </summary>
+        internal static string FeedbackMessageForm {
+            get {
+                return ResourceManager.GetString("FeedbackMessageForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Текст отзыва.
+        /// </summary>
+        internal static string FeedbackText {
+            get {
+                return ResourceManager.GetString("FeedbackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как пт.-сб..
         /// </summary>
         internal static string FriSat {
@@ -228,6 +264,15 @@ namespace Resources {
         internal static string PhEmail {
             get {
                 return ResourceManager.GetString("PhEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Введите отзыв.
+        /// </summary>
+        internal static string PhFeedbackText {
+            get {
+                return ResourceManager.GetString("PhFeedbackText", resourceCulture);
             }
         }
         
@@ -327,6 +372,15 @@ namespace Resources {
         internal static string SendBooking {
             get {
                 return ResourceManager.GetString("SendBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Отправить отзыв.
+        /// </summary>
+        internal static string SendFeedbackMessage {
+            get {
+                return ResourceManager.GetString("SendFeedbackMessage", resourceCulture);
             }
         }
         

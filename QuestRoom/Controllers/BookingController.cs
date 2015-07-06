@@ -16,23 +16,77 @@ namespace QuestRoom.Controllers
             var costs = Provider.GetCosts();
             var bDate = DateTime.ParseExact(date, "ddMMyy", CultureInfo.InvariantCulture);
             var bTime = TimeSpan.ParseExact(time, "hhmm", CultureInfo.InvariantCulture);
+            
+            var checkResult = Provider.CheckBooking(questId, bDate + bTime);
 
-            var model = new ConfirmViewModel
+            switch (checkResult)
             {
-                Quest = quest,
-                Costs = costs,
-                SelectedDate = bDate,
-                SelectedTime = bTime
-            };
-
-            return View(model);
+                case ProcessBookingStatus.Booked:
+                    return View("InfoPanel", new InfoPanelViewModel
+                    {
+                        Title = "Бронирование не выполнено",
+                        Message = "Указанные дата и время уже заняты",
+                        ShowLinkToSchedule = true
+                    });
+                case ProcessBookingStatus.NotExist:
+                    return View("InfoPanel", new InfoPanelViewModel
+                    {
+                        Title = "Бронирование невозможно",
+                        Message = "Указанные дата и время недопустимы",
+                        ShowLinkToSchedule = false
+                    });
+                default:
+                    var model = new ConfirmViewModel
+                    {
+                        Quest = quest,
+                        Costs = costs,
+                        Prices = costs.Select(x => new SelectListItem { Text = x.Persons, Value = x.Id.ToString() }),
+                        SelectedDate = bDate,
+                        SelectedTime = bTime
+                    };
+                    return View(model);
+            }
         }
 
         [HttpPost]
         public ActionResult Confirm(ConfirmViewModel model)
         {
-            return null;
+            var questId = int.Parse((string)RouteData.Values["questId"]);
+            var selectedDate = DateTime.ParseExact((string)RouteData.Values["date"], "ddMMyy", CultureInfo.InvariantCulture);
+            var selectedTime = TimeSpan.ParseExact((string)RouteData.Values["time"], "hhmm", CultureInfo.InvariantCulture);
+            var result = Provider.SaveBooking(
+                questId, 
+                selectedDate + selectedTime, 
+                model.Price, 
+                model.PlayerName, 
+                model.Phone, 
+                model.Email, 
+                model.Note);
 
+            switch (result)
+            {
+                case ProcessBookingStatus.Booked:
+                    return View("InfoPanel", new InfoPanelViewModel
+                    {
+                        Title = "Бронирование не выполнено",
+                        Message = "Указанные дата и время уже заняты",
+                        ShowLinkToSchedule = true
+                    });
+                case ProcessBookingStatus.NotExist:
+                    return View("InfoPanel", new InfoPanelViewModel
+                    {
+                        Title = "Бронирование невозможно",
+                        Message = "Указанные дата и время недопустимы",
+                        ShowLinkToSchedule = false
+                    });
+                default:
+                    return View("InfoPanel", new InfoPanelViewModel
+                    {
+                        Title = "Бронирование выполнено",
+                        Message = "В течении часа с вами свяжется оператор и подтвердит бронь",
+                        ShowLinkToSchedule = false
+                    });
+            }
         }
 
         // GET: Booking

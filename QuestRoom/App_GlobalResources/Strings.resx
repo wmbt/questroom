@@ -213,4 +213,22 @@
   <data name="Time" xml:space="preserve">
     <value>Время</value>
   </data>
+  <data name="AddFeedbackMessage" xml:space="preserve">
+    <value>Добавить отзыв</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Отзывы</value>
+  </data>
+  <data name="FeedbackMessageForm" xml:space="preserve">
+    <value>Добавление отзыва</value>
+  </data>
+  <data name="FeedbackText" xml:space="preserve">
+    <value>Текст отзыва</value>
+  </data>
+  <data name="PhFeedbackText" xml:space="preserve">
+    <value>Введите отзыв</value>
+  </data>
+  <data name="SendFeedbackMessage" xml:space="preserve">
+    <value>Отправить отзыв</value>
+  </data>
 </root>

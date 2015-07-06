@@ -1,0 +1,36 @@
+﻿@using System.Web.Optimization
+@model QuestRoom.Models.FeedbackMessageViewModel
+@{
+    ViewBag.Title = @Resources.Strings.FeedbackMessageForm;
+}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" style="padding-bottom: 50px;">
+        <h2>@Resources.Strings.FeedbackMessageForm</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        @using (Html.BeginForm("AddMessage", "Feedback", FormMethod.Post, new {onsubmit = "return vaidateForm()"}))
+        {
+            <div class="form-group col-md-12">
+                @Html.LabelFor(x => x.QuestId, Resources.Strings.Quest)
+                @Html.DropDownListFor(x => x.QuestId, Model.Quests, new {@class = "form-control"})
+            </div>
+
+            <div class="form-group col-md-12 has-feedback">
+                @Html.LabelFor(x => x.Email, Resources.Strings.Email)
+                @Html.TextBoxFor(x => x.Email, new {@class = "form-control", placeholder = Resources.Strings.PhEmail})
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+            </div>
+            <div class="form-group col-md-12 has-feedback">
+                @Html.LabelFor(x => x.Text, Resources.Strings.FeedbackText)
+                @Html.TextAreaFor(x => x.Text, new {@class = "form-control", placeholder = Resources.Strings.PhFeedbackText})
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-warning">@Resources.Strings.SendFeedbackMessage</button>
+            </div>
+        }
+    </div>
+</div>
+@Scripts.Render("~/Scripts/feedback")
