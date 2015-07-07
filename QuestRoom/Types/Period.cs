@@ -1,8 +1,7 @@
 using System;
 using System.Data;
-using QuestRoom.Storage;
 
-namespace QuestRoom.Models
+namespace QuestRoom.Types
 {
     public class Period
     {

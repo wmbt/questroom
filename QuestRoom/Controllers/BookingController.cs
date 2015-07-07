@@ -148,14 +148,14 @@ namespace QuestRoom.Controllers
 
             var bookings = (from q in quests
                 let periods = Provider.GetPeriods(q.Id, selectedDate)
-                select new Booking
+                select new QuestSchedule
                 {
                     Quest = q, Schedule = periods
                 }).ToArray();
 
-            var model = new BookingViewModel
+            var model = new SchedulesViewModel
             {
-                Bookings = bookings,
+                QuestSchedules = bookings,
                 Costs = costs,
                 CurrentMaxDate = currentMaxDate,
                 CurrentMinDate = currentMinDate,

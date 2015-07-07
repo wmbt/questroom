@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using QuestRoom.Types;
 
 namespace QuestRoom.Models
 {

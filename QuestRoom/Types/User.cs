@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web;
-using QuestRoom.Storage;
+﻿using System.Data;
 
-namespace QuestRoom.Models
+namespace QuestRoom.Types
 {
     public class User
     {
         public int Id { get; set; }
         public string Login { get; set; }
         public string Name { get; set; }
-        //public string Password { get; set; }
         public bool Active { get; set; }
         public string Email { get; set; }
 

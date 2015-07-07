@@ -1,6 +1,6 @@
 ﻿@using System.Collections
 @using QuestRoom.Types
-@model QuestRoom.Models.BookingViewModel
+@model QuestRoom.Models.SchedulesViewModel
 @{
     ViewBag.Title = "Расписание";
 }
@@ -56,7 +56,7 @@
         </nav>
     </div>
 </div>
-@foreach (var b in Model.Bookings)
+@foreach (var b in Model.QuestSchedules)
 {
     <div class="row">
         <div class="col-md-3">

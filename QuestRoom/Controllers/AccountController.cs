@@ -30,7 +30,7 @@ namespace QuestRoom.Controllers
             var user = Provider.GetUser(model.Username, model.Password);
             if (user != null)
             {
-                FormsAuthentication.SetAuthCookie(user.Name, false);
+                FormsAuthentication.SetAuthCookie(user.Id.ToString(), false);
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                     && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                 {

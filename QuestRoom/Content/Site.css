@@ -68,3 +68,12 @@ h4.booking {
 .feedback-button {
     margin-top: 20px;
 }
+
+h3.fillspace
+{
+    position: absolute; top:  55px; right: 0; left: 0;
+}
+
+.bookings td {
+    vertical-align: middle !important;
+}

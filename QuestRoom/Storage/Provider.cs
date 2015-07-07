@@ -5,7 +5,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
-using QuestRoom.Models;
 using QuestRoom.Types;
 
 namespace QuestRoom.Storage
@@ -24,6 +23,47 @@ namespace QuestRoom.Storage
         static Provider()
         {
             ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ConnectionString;
+        }
+
+        public Booking[] GetBookings(DateTime date)
+        {
+            const string query =
+                "SELECT b.Id, b.QuestId, q.Name as QuestName, b.Date, b.PlayerName, " +
+                        "b.Email, b.Phone, b.Comment, b.Status, b.Created, " +
+                        "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost " +
+                "FROM Quests q, Bookings b " +
+                "left join Users u on u.Id = b.OperatorId " +
+                "where cast(b.Date as date) = @Date and b.QuestId = q.Id " +
+                "order by b.Date desc";
+
+            var items = GetItems(query, new SqlParameter("@Date", date), x => new Booking(x));
+
+            return items.ToArray();
+        }
+
+        public Booking GetBooking(int bookingId)
+        {
+            const string query =
+                "SELECT b.Id, b.QuestId, q.Name as QuestName, b.Date, b.PlayerName, " +
+                        "b.Email, b.Phone, b.Comment, b.Status, b.Created, " +
+                        "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost " +
+                "FROM Quests q, Bookings b " +
+                "left join Users u on u.Id = b.OperatorId " +
+                "where b.Id = @Id and b.QuestId = q.Id";
+
+            var item = GetItems(query, new SqlParameter("@Id", bookingId), x => new Booking(x)).Single();
+
+            return item;
+        }
+
+        public Booking SetBookingStatus(int bookingId, BookingStatus status, int userId)
+        {
+            const string query = "update Bookings set Status = @Status, OperatorId = @OperatorId, Processed = getdate() where Id = @Id";
+            ExecuteNonQuery(query,
+                new[] { new SqlParameter("@Id", bookingId), new SqlParameter("@Status", (int)status), new SqlParameter("@OperatorId", userId) });
+
+            return GetBooking(bookingId);
+
         }
 
         public User GetUser(string login, string password)

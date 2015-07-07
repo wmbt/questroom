@@ -1,5 +1,98 @@
-﻿@model dynamic
+﻿@using QuestRoom.Storage
+@using QuestRoom.Types
+@model QuestRoom.Areas.Backend.Models.BookingsViewModel
 @{
     ViewBag.Title = "Бронирование";
+    var nextDate = Model.CurrentDate.AddDays(1);
+    var prevDate = Model.CurrentDate.AddDays(-1);
 }
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-md-12">
+        <nav>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="@Url.RouteUrl("Backend", new { action = "Bookings", param = prevDate.ToString("ddMMyy") })">
+                        <span aria-hidden="true">&larr;</span> 
+                        @prevDate.ToString("d MMMM yyyy")
+                    </a>
+                </li>
+                <li class="next">
+                    <a href="@Url.RouteUrl("Backend", new {action = "Bookings", param = nextDate.ToString("ddMMyy")})">@nextDate.ToString("d MMMM yyyy")
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <h3>@Model.CurrentDate.ToString("d MMMM yyyy")</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped bookings">
+            <tr>
+                <th>№</th>
+                <th>Квест</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Статус</th>
+                <th>Создана</th>
+                <th>Обработана</th>
+                <th></th>
+            </tr>
+            @foreach (var b in Model.Bookings)
+            {
+                var processed = b.Processed.HasValue
+                    ? string.Format("{0} ({1})", b.Processed.Value.ToString("dd.MM.yyyy HH:mm"), b.OperatorName)
+                    : string.Empty;
+
+                var canCancel = "disabled=\"disabled\"";
+                var canConfirm = "disabled=\"disabled\"";
+
+                if (b.Status == BookingStatus.New)
+                {
+                    canCancel = canConfirm = String.Empty;
+                }
+                else if (b.Status == BookingStatus.Confirmed)
+                {
+                    if (b.Date > DateTime.Now)
+                    {
+                        canCancel = String.Empty;
+                    }
+
+                }
+
+                <tr id="@b.Id">
+                    <td>@b.Id</td>
+                    <td>@b.QuestName</td>
+                    <td>@b.Date.ToString("dd.MM.yyyy")</td>
+                    <td>@b.Date.ToString("HH:mm")</td>
+                    <td>@b.PlayerName</td>
+                    <td>@b.Email</td>
+                    <td>@b.Phone</td>
+                    <td class="status">@b.Status.Description()</td>
+                    <td>@b.Created.ToString("dd.MM.yyy HH:mm")</td>
+                    <td class="processed">@processed</td>
+                    <td>
+                        <button class="btn btn-default btn-sm confirm" type="button" title="Подтвердить" @Html.Raw(canConfirm)>
+                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-danger btn-sm cancel" type="button" title="Отменить" @Html.Raw(canCancel)>
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section PageScripts
+{
+    @System.Web.Optimization.Scripts.Render("~/Scripts/bookingtable")    
+}
+
 

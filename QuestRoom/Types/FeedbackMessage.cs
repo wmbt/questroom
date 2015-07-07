@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using QuestRoom.Storage;
 
-namespace QuestRoom.Models
+namespace QuestRoom.Types
 {
     public class FeedbackMessage
     {
@@ -13,6 +10,7 @@ namespace QuestRoom.Models
         public int QuestId { get; set; }
         public string QuestName { get; set; }
         public DateTime Created { get; set; }
+        public FeedbackMessageStatus Status { get; set; }
         public string PlayerName { get; set; }
         public string Text { get; set; }
 
@@ -24,6 +22,7 @@ namespace QuestRoom.Models
             Created = dr.GetValueOrDefault<DateTime>("Created");
             PlayerName = dr.GetValueOrDefault<string>("PlayerName");
             Text = dr.GetValueOrDefault<string>("Text");
+            Status = (FeedbackMessageStatus)dr.GetValueOrDefault<byte>("Status");
         }
     }
 }

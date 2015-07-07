@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlTypes;
 
-namespace QuestRoom.Storage
+namespace QuestRoom.Types
 {
     public static class Extensions
     {
@@ -30,6 +31,13 @@ namespace QuestRoom.Storage
         {
             return row.IsDBNull(row.GetOrdinal(fieldName)) ? defaultValue : (T)row[fieldName];
         }
-     
+
+        public static string Description(this Enum objectType)
+        {
+            var fi = objectType.GetType().GetField(objectType.ToString());
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return attributes.Length > 0 ? attributes[0].Description : objectType.ToString();
+        }
     }
 }
