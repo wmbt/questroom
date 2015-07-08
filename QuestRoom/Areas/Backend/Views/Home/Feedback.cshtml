@@ -1,5 +1,71 @@
-﻿@model dynamic
+﻿@using QuestRoom.Storage
+@using QuestRoom.Types
+@model FeedbackMessage[]
 @{
     ViewBag.Title = "Отзывы";
 }
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-md-12">
+        <h3>Отзывы</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped bookings">
+            <tr>
+                <th>Создана</th>
+                <th>Квест</th>
+                <th>Email</th>
+                <th>Имя</th>
+                <th>Отзыв</th>
+                <th>Статус</th>
+                <th>Обработана</th>
+                <th></th>
+            </tr>
+            @foreach (var m in Model)
+            {
+                var processed = m.Processed.HasValue
+                    ? string.Format("{0} ({1})", m.Processed.Value.ToString("dd.MM.yyyy HH:mm"), m.OperatorName)
+                    : string.Empty;
+
+                var canCancel = "disabled=\"disabled\"";
+                var canConfirm = "disabled=\"disabled\"";
+
+                if (m.Status == FeedbackMessageStatus.New)
+                {
+                    canCancel = canConfirm = String.Empty;
+                }
+                else if (m.Status == FeedbackMessageStatus.Published)
+                {
+                    canCancel = String.Empty;
+                }
+
+                <tr id="@m.Id">
+                    <td>@m.Created.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@m.QuestName</td>
+                    <td>@Html.RouteLink(m.Email, "Backend", new { email = m.Email, action = "BookingsByEmail" }) </td>
+                    <td>@m.PlayerName</td>
+                    <td>@m.Text</td>
+                    <td class="status">@m.Status.Description()</td>
+                    <td class="processed">@processed</td>
+                    <td>
+                        <button class="btn btn-default btn-sm published" type="button" title="Подтвердить" @Html.Raw(canConfirm)>
+                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-danger btn-sm banned" type="button" title="Отменить" @Html.Raw(canCancel)>
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section PageScripts
+{
+    @System.Web.Optimization.Scripts.Render("~/Scripts/feedbacktable")
+}
+
 

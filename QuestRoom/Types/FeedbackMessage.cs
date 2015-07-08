@@ -12,7 +12,11 @@ namespace QuestRoom.Types
         public DateTime Created { get; set; }
         public FeedbackMessageStatus Status { get; set; }
         public string PlayerName { get; set; }
+        public string Email { get; set; }
         public string Text { get; set; }
+        public DateTime? Processed { get; set; }
+        public int? OperatorId { get; set; }
+        public string OperatorName { get; set; }
 
         public FeedbackMessage(IDataRecord dr)
         {
@@ -21,8 +25,12 @@ namespace QuestRoom.Types
             QuestName = dr.GetValueOrDefault<string>("QuestName");
             Created = dr.GetValueOrDefault<DateTime>("Created");
             PlayerName = dr.GetValueOrDefault<string>("PlayerName");
+            Email = dr.GetValueOrDefault<string>("Email");
             Text = dr.GetValueOrDefault<string>("Text");
             Status = (FeedbackMessageStatus)dr.GetValueOrDefault<byte>("Status");
+            Processed = dr.GetValueOrDefault<DateTime?>("Processed");
+            OperatorId = dr.GetValueOrDefault<int?>("OperatorId");
+            OperatorName = dr.GetValueOrDefault<string>("OperatorName");
         }
     }
 }

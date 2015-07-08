@@ -11,7 +11,7 @@ namespace QuestRoom.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var messages = Provider.GetFeedbackMessages();
+            var messages = Provider.GetConfirmedFeedbackMessages();
             return View(messages);
         }
 

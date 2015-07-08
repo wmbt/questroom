@@ -100,6 +100,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MessageToAdmin.txt" />
+    <Content Include="App_Data\MessageToPlayer.txt" />
     <Content Include="App_Data\QuestRooms.mdf" />
     <Content Include="App_Data\QuestRooms_log.ldf">
       <DependentUpon>QuestRooms.mdf</DependentUpon>
@@ -130,7 +132,9 @@
     <Content Include="Areas\Backend\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Backend\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Backend\Views\Shared\_NavMenu.cshtml" />
+    <Content Include="Areas\Backend\Views\Home\BookingsByEmail.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\feedbacktable.js" />
     <Content Include="Scripts\bookingtable.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -163,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Backend\Models\BookingsByEmailViewModel.cs" />
     <Compile Include="Areas\Backend\Models\BookingsViewModel.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />

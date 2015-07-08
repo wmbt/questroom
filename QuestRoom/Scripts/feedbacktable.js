@@ -1,9 +1,9 @@
-﻿var Confirmed = 1,
-    Canceled = 2;
+﻿var Published = 1,
+    Banned = 2;
 
 $(document).ready(function () {
-    $(".confirm").click(action);
-    $(".cancel").click(action);
+    $(".published").click(action);
+    $(".banned").click(action);
 });
 
 function action(event) {
@@ -11,17 +11,16 @@ function action(event) {
         row = button.parent().parent(),
         id = row.prop("id");
     $.ajax({
-        url: "/backend/setbookingstatus",
+        url: "/backend/setmessagestatus",
         method: "GET",
         type: "JSON",
         data: {
-            bookingId: id,
-            status: button.hasClass("confirm") ? Confirmed : Canceled
+            messageId: id,
+            status: button.hasClass("published") ? Published : Banned
         },
         success: function(data) {
-            if (button.hasClass("confirm"))
-                row.find(".cancel").prop("disabled", false);
-
+            if (button.hasClass("published")) 
+                $(".cancel").prop("banned", false);
             row.find(".status").text(data.Status);
             row.find(".processed").text(data.Processed);
         },
@@ -29,7 +28,7 @@ function action(event) {
             
         }
     });
-    row.find(".confirm").prop("disabled", true);
-    row.find(".cancel").prop("disabled", true);
+    $(".published").prop("disabled", true);
+    $(".banned").prop("disabled", true);
     event.preventDefault();
 }

@@ -18,24 +18,47 @@ namespace QuestRoom.Storage
                                            "and not exists(select * from Bookings b " +
                                            "where b.QuestId = @QuestId and b.Date = @DateTime and b.Status in (0, 1))";
 
+        private const string BookingsQuery = "SELECT b.Id, b.QuestId, q.Name as QuestName, b.Date, b.PlayerName, " +
+                                             "b.Email, b.Phone, b.Comment, b.Status, b.Created, " +
+                                             "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost " +
+                                             "FROM Quests q, Bookings b " +
+                                             "left join Users u on u.Id = b.OperatorId " +
+                                             "where {0} and b.QuestId = q.Id " +
+                                             "order by b.Date desc";
+
+        private const string MessagesQuery = "select f.Id, q.Id as QuestId, q.Name__ as QuestName, f.Created, f.Processed, f.Email, f.Status, " +
+                                             "(select top(1) b.PlayerName from Bookings b where lower(b.Email) = lower(f.Email)) PlayerName, " +
+                                             "f.Text, f.OperatorId, u.Name as OperatorName " +
+                                             "from Quests q, Feedback f " +
+                                             "left join Users u on u.Id = f.OperatorId " +
+                                             "where f.QuestId = q.Id and ({0}) " +
+                                             "order by f.Created desc";
+
         private static readonly string ConnectionString;
 
         static Provider()
         {
             ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ConnectionString;
         }
+        public string[] GetUsersEmails()
+        {
+            const string query = "select u.Email from Users u where u.Active = 1";
+            var items = GetItems(query, x => x.GetValueOrDefault<string>("Email"));
+            return items.ToArray();
+        }
+        
+        
+        public Booking[] GetBookings(string email)
+        {
+            var query = string.Format(BookingsQuery, "lower(b.Email) = lower(@Email)");
+            var items = GetItems(query, new SqlParameter("@Email", email), x => new Booking(x));
+            
+            return items.ToArray();
+        }
 
         public Booking[] GetBookings(DateTime date)
         {
-            const string query =
-                "SELECT b.Id, b.QuestId, q.Name as QuestName, b.Date, b.PlayerName, " +
-                        "b.Email, b.Phone, b.Comment, b.Status, b.Created, " +
-                        "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost " +
-                "FROM Quests q, Bookings b " +
-                "left join Users u on u.Id = b.OperatorId " +
-                "where cast(b.Date as date) = @Date and b.QuestId = q.Id " +
-                "order by b.Date desc";
-
+            var query = string.Format(BookingsQuery, "cast(b.Date as date) = @Date");
             var items = GetItems(query, new SqlParameter("@Date", date), x => new Booking(x));
 
             return items.ToArray();
@@ -66,6 +89,14 @@ namespace QuestRoom.Storage
 
         }
 
+        public User GetUser(int userId)
+        {
+            const string query = "select * from Users u where Id = @Id";
+            var item = GetItems(query, new SqlParameter("@Id", userId), x => new User(x));
+
+            return item.SingleOrDefault();
+        }
+        
         public User GetUser(string login, string password)
         {
             const string query = "select * from Users u where lower(u.Login) = lower(@Login) and u.Password = @Password";
@@ -168,13 +199,13 @@ namespace QuestRoom.Storage
                     return ProcessBookingStatus.Booked;
 
                 const string query =
-                    "insert into Bookings(QuestId, Date, CostId, PlayerName, Email, Phone, Comment) values(@QuestId, @Date, @CostId, @PlayerName, @Email, @Phone, @Comment)";
+                    "insert into Bookings(QuestId, Date, Cost, PlayerName, Email, Phone, Comment) values(@QuestId, @Date, @Cost, @PlayerName, @Email, @Phone, @Comment)";
                 var addBookingCommand = new SqlCommand(query, conn, trn);
                 addBookingCommand.Parameters.AddRange(new[]
                 {
                     new SqlParameter("@QuestId", questId),
                     new SqlParameter("@Date", bookingDateTime),
-                    new SqlParameter("@CostId", costId),
+                    new SqlParameter("@Cost", costId),
                     new SqlParameter("@PlayerName", name),
                     new SqlParameter("@Email", email),
                     new SqlParameter("@Phone", phone),
@@ -186,15 +217,42 @@ namespace QuestRoom.Storage
             }
         }
 
+        public FeedbackMessage SetFeedbackMessageStatus(int messageId, FeedbackMessageStatus status, int operatorId)
+        {
+            const string query =
+                "update Feedback set Status = @Status, OperatorId = @OperatorId, Processed = getdate() " +
+                "where Id = @Id";
+            ExecuteNonQuery(query,
+                new[]
+                {
+                    new SqlParameter("@Status", (int) status), 
+                    new SqlParameter("@OperatorId", operatorId),
+                    new SqlParameter("@Id", messageId)
+                });
+
+            var message = GetFeedbackMessage(messageId);
+
+            return message;
+        }
+
+        public FeedbackMessage GetFeedbackMessage(int messageId)
+        {
+            var query = string.Format(MessagesQuery, "f.Id = @Id");
+            var item = GetItems(query, new SqlParameter("@Id", messageId), x => new FeedbackMessage(x)).Single();
+
+            return item;
+        }
+
         public FeedbackMessage[] GetFeedbackMessages()
         {
-            const string query = "select f.Id, q.Id as QuestId, q.Name__ as QuestName, f.Created, " +
-                                 "(select top(1) b.PlayerName from Bookings b where lower(b.Email) = lower(f.Email)) PlayerName, " +
-                                 "f.Text " +
-                                 "from [Feedback] f, Quests q " +
-                                 "where f.QuestId = q.Id and f.Status = 1 " +
-                                 "order by f.Created desc";
+            var query = string.Format(MessagesQuery, "1 = 1");
+            var items = GetItems(query, x => new FeedbackMessage(x));
+            return items.ToArray();
+        }
 
+        public FeedbackMessage[] GetConfirmedFeedbackMessages()
+        {
+            var query = string.Format(MessagesQuery, "f.Status = 1");
             var items = GetItems(query, x => new FeedbackMessage(x));
             return items.ToArray();
         }
@@ -296,5 +354,6 @@ namespace QuestRoom.Storage
             var postfix = threadCulture.Name == "en-US" ? EngCulturePostfix : string.Empty;
             return query.Replace("__", postfix);
         }
+        
     }
 }

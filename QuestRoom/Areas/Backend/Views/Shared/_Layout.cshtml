@@ -1,7 +1,11 @@
 ﻿@using System.Threading
 @using System.Web.Optimization
+@using QuestRoom.Storage
 @{
-    var username = Context.User.Identity.Name;
+    var provider = new Provider();
+    
+    var userId = int.Parse(Context.User.Identity.Name);
+    var username = provider.GetUser(userId).Name;
 }
 
 <!DOCTYPE html>

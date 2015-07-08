@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 using QuestRoom.Models;
 using QuestRoom.Types;
@@ -40,7 +43,7 @@ namespace QuestRoom.Controllers
                     {
                         Quest = quest,
                         Costs = costs,
-                        Prices = costs.Select(x => new SelectListItem { Text = x.Persons, Value = x.Id.ToString() }),
+                        Prices = costs.Select(x => new SelectListItem { Text = x.Persons, Value = x.Workdays.ToString() }),
                         SelectedDate = bDate,
                         SelectedTime = bTime
                     };
@@ -80,6 +83,13 @@ namespace QuestRoom.Controllers
                         ShowLinkToSchedule = false
                     });
                 default:
+                    var quest = Provider.GetQuest(questId);
+                    try
+                    {
+                        MessageToPlayer(model.Email, model.PlayerName, quest.Name, selectedDate + selectedTime);
+                        MessageToAdmins();
+                    }
+                    catch { }
                     return View("ConfirmResult", new ConfirmResultViewModel
                     {
                         Title = Resources.Strings.BookingCompleteTitle,
@@ -165,6 +175,48 @@ namespace QuestRoom.Controllers
             };
 
             return View(model);
+        }
+
+        private void MessageToPlayer(string email, string playername, string questName, DateTime questTime)
+        {
+            var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/MessageToPlayer.txt"));
+            var body = string.Format(bodyTemplate, playername, questName, questTime.ToString("d MMMM yyyy"));
+            var subject = string.Format("Бронирование квеста \"{0}\"", questName);
+            SendEmail(body, subject, new [] { email});
+        }
+
+        private void MessageToAdmins()
+        {
+            var body = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/MessageToAdmin.txt"));
+            var subject = "Новое бронирование";
+            var emails = Provider.GetUsersEmails();
+            SendEmail(body, subject, emails);
+        }
+
+        private void SendEmail(string message, string subject, string[] sendTo)
+        {
+            var username = ConfigurationManager.AppSettings["SmtpUsername"];
+            var password = ConfigurationManager.AppSettings["SmtpPassword"];
+            var host = ConfigurationManager.AppSettings["SmtpHost"];
+            var smtpPort = int.Parse(ConfigurationManager.AppSettings["SmtpPort"]);
+            var from = ConfigurationManager.AppSettings["From"];
+            var recipients = string.Join(";", sendTo);
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = username,  // replace with valid value
+                    Password = password  // replace with valid value
+                };
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = credential;
+                smtp.Host = host;
+                smtp.Port = smtpPort;
+                smtp.EnableSsl = true;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Send(from, recipients, subject, message);
+            }
         }
     }
 }
