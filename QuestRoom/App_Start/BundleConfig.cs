@@ -19,10 +19,15 @@ namespace QuestRoom
                 "~/Scripts/bookingtable.js"));
             bundles.Add(new ScriptBundle("~/Scripts/feedbacktable").Include(
                 "~/Scripts/feedbacktable.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/schedule").Include(
+                "~/Scripts/bootstrap-datepicker.js",
+                "~/Scripts/bootstrap-datepicker.ru.min.js", 
+                "~/Scripts/schedule.js"));
             /*bundles.Add(new StyleBundle("~/Content/common").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));*/
-            
+            bundles.Add(new StyleBundle("~/Content/schedule").Include(
+                "~/Content/bootstrap-datepicker.css"));
             bundles.Add(new StyleBundle("~/Content/common").Include(
                 "~/Content/bootstrap-slate.css",
                 "~/Content/site.css"));

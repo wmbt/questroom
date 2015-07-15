@@ -1,4 +1,14 @@
-﻿function vaidateForm() {
+﻿$(document).ready(function() {
+    $("#cost").val($("#priceSelector").val());
+
+    $("#priceSelector").change(function (e) {
+        var value = $(this).val();
+        $("#cost").val(value);
+    });
+});
+
+
+function vaidateForm() {
     var isValid = true,
         name = $("#PlayerName"),
         phone = $("#Phone"),

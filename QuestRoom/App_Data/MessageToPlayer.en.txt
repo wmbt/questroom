@@ -1,0 +1,4 @@
+﻿Hi, {0}!
+Yo booked quest "{1}" on {2}.
+Quest price {3} rub.
+Shortly operator will call you to confirm your reservation.

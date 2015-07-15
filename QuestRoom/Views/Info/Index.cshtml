@@ -2,63 +2,60 @@
 @model QuestRoom.Models.InfoViewModel
 
 @{
-    ViewBag.Title = "Информация";
+    ViewBag.Title = Resources.Strings.Information;
 }
 
 @foreach (var q in Model.Quests)
 {
-    <div class="row">
-        <div class="col-md-3">
-            <div class="thumbnail thumbnail-with-text">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-offset-1 col-md-3 col-sm-5">
+            <a class="anchor" name="@string.Format("quest{0}", q.Id)"></a>
+            <div class="img-thumbnail thumbnail-with-text">
                 <img src="@Url.Content("~/Content/Images/q" + q.Id + ".jpg")" alt="@q.Name">
                 <div class="caption post-content">
                     <table class="blocks-table props-table">
                         <tr>
                             <td class="p-name">
-                                @Resources.Strings.Complexity
-                                :
-                            </td>
+                                <small>@Resources.Strings.Complexity:</small></td>
                             <td class="p-value">
-                                @Html.Stars(q.Complexity)
+                                <small>@Html.Stars(q.Complexity)</small>
                             </td>
                         </tr>
                         <tr>
                             <td class="p-name">
-                                @Resources.Strings.Persons
-                                :
+                                <small>@Resources.Strings.Persons:</small>
                             </td>
                             <td class="p-value">
-                                @q.Persons
+                                <small>@q.Persons</small>
                             </td>
                         </tr>
                         <tr>
                             <td class="p-name">
-                                @Resources.Strings.Duration
-                                :
+                                <small> @Resources.Strings.Duration:</small>
                             </td>
                             <td class="p-value">
-                                @q.Duration.TotalMinutes
-                                @Resources.Strings.Min
+                                <small>@q.Duration.TotalMinutes @Resources.Strings.Min</small>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <h3>@q.Name</h3>
+        <div class="col-md-8 col-sm-7">
+            <h3 class="yellow">@q.Name</h3>
             <p>@q.Description</p>
             @Html.ActionLink(
-                Resources.Strings.Book, 
-                "Index", 
-                "Booking", 
-                null, 
+                Resources.Strings.Book,
+                "Index",
+                "Booking",
+                null,
                 null,
                 "quest" + q.Id,
                 null,
                 new { @class = "btn btn-warning" })
-            
-            @Html.ActionLink(@Resources.Strings.Comments, "Index", "Feedback", null,  new { @class = "btn btn-warning" })
+
+            @Html.ActionLink(@Resources.Strings.Comments, "Index", "Feedback", null, new { @class = "btn btn-warning" })
         </div>
+
     </div>
 }

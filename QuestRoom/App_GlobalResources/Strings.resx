@@ -130,7 +130,7 @@
     <value>Подарочные сертификаты</value>
   </data>
   <data name="Comments" xml:space="preserve">
-    <value>Отзывы</value>
+    <value>Комментарии</value>
   </data>
   <data name="Complexity" xml:space="preserve">
     <value>Сложность</value>
@@ -150,14 +150,14 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="FriSat" xml:space="preserve">
-    <value>пт.-сб.</value>
+  <data name="Weekends" xml:space="preserve">
+    <value>сб.-вс.</value>
   </data>
   <data name="Min" xml:space="preserve">
     <value>мин.</value>
   </data>
-  <data name="MonThru" xml:space="preserve">
-    <value>пн.-чт.</value>
+  <data name="WorkdaysDay" xml:space="preserve">
+    <value>пн.-пт. до 17:00</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
@@ -190,7 +190,7 @@
     <value>Количество игроков</value>
   </data>
   <data name="Price" xml:space="preserve">
-    <value>Стоимость</value>
+    <value>Стоимость, руб.</value>
   </data>
   <data name="Quest" xml:space="preserve">
     <value>Квест</value>
@@ -238,7 +238,7 @@
     <value>Бронирование не выполнено</value>
   </data>
   <data name="BookingCompleteMessage" xml:space="preserve">
-    <value>В течении часа с вами свяжется оператор и подтвердит бронь</value>
+    <value>Вам на почту отправлено письмо с полной информацией по Вашему бронированию</value>
   </data>
   <data name="BookingCompleteTitle" xml:space="preserve">
     <value>Бронирование выполнено</value>
@@ -281,5 +281,14 @@
   </data>
   <data name="LoginFailure" xml:space="preserve">
     <value>Неверное имя пользователя или пароль</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="ConfirmBooking" xml:space="preserve">
+    <value>Подтверждение бронирования</value>
+  </data>
+  <data name="WorkdaysEvening" xml:space="preserve">
+    <value>пн.-пт. после 17:00</value>
   </data>
 </root>

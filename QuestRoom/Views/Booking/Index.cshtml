@@ -1,18 +1,32 @@
 ﻿@using System.Collections
+@using System.Threading
+@using System.Web.Optimization
+@using Newtonsoft.Json
 @using QuestRoom.Types
 @model QuestRoom.Models.SchedulesViewModel
 @{
-    ViewBag.Title = "Расписание";
+    ViewBag.Title = Resources.Strings.Shedule;
+}
+
+@section Head{
+    @Styles.Render("~/Content/schedule")
+
+    <script type="text/javascript">
+        window.lang = '@Thread.CurrentThread.CurrentCulture.Name';
+        window.selectedDate = new Date(@Html.Raw(JsonConvert.SerializeObject(Model.SelectedDate)));
+        window.startDate = new Date(@Html.Raw(JsonConvert.SerializeObject(DateTime.Now)));
+        window.endDate = new Date(@Html.Raw(JsonConvert.SerializeObject(DateTime.Now.AddMonths(1))));
+    </script>
 }
 <div class="row" style="padding-bottom: 50px;">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-5">
         @Html.Partial("_Cost", Model.Costs)
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7 col-sm-7">
         <h4 class="booking">@string.Format("{0} {1}", Resources.Strings.BookingOn, Model.SelectedDate.ToString("d MMMM yyyy"))</h4>
-        <h5>@Resources.Strings.SelectDate</h5>
+        <p style="margin-top: 20px;">@Resources.Strings.SelectDate</p>
         <nav>
-            <ul class="pagination">
+            <ul class="pagination" style="margin-top: 0px; margin-bottom: 0px;">
                 @{
                     var cls = Model.JumpPrevDate == Model.CurrentMinDate ? "disabled" : string.Empty;
                 }
@@ -26,14 +40,14 @@
                     else
                     {
                         <span aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </span>
+                                <span aria-hidden="true">&laquo;</span>
+                            </span>
                     }
                 </li>
                 @for (var date = Model.CurrentMinDate; date <= Model.CurrentMaxDate; date += new TimeSpan(1, 0, 0, 0))
                 {
                     cls = date == Model.SelectedDate ? "active" : string.Empty;
-                    <li class="@cls">@Html.ActionLink(date.ToString("d MMMM"), "Index", "Booking", new {date = date.ToString("ddMMyy")}, null)</li>
+                    <li class="@cls">@Html.ActionLink(date.ToString("d MMMM, ddd"), "Index", "Booking", new {date = date.ToString("ddMMyy")}, null)</li>
                 }
                 @{
                     cls = Model.JumpNextDate == Model.CurrentMaxDate ? "disabled" : string.Empty;
@@ -48,47 +62,55 @@
                     else
                     {
                         <span aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </span>
+                                <span aria-hidden="true">&raquo;</span>
+                            </span>
                     }
                 </li>
             </ul>
         </nav>
+        @*<input type="text" class="form-control" id="datePicker" style="width: 150px; margin-top: 10px;"/>*@
+        <div class="input-group date" style="width: 150px; margin-top: 10px;">
+            <input type="text" class="form-control">
+            <span class="input-group-addon" style="cursor: pointer;">
+                <i class="glyphicon glyphicon-th"></i>
+            </span>
+        </div>
     </div>
 </div>
+
 @foreach (var b in Model.QuestSchedules)
 {
-    <div class="row">
-        <div class="col-md-3">
-            <div class="thumbnail thumbnail-with-text">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-3 col-md-offset-1 col-sm-5">
+            <a class="anchor" name="@string.Format("quest{0}", b.Quest.Id)"></a>
+            <div class="img-thumbnail thumbnail-with-text">
                 <img src="@Url.Content("~/Content/Images/q" + b.Quest.Id + ".jpg")" alt="@b.Quest.Name">
                 <div class="caption post-content">
                     <table class="blocks-table props-table">
                         <tr>
                             <td rowspan="3">
-                                <strong>@b.Quest.Name</strong>
+                                <h4 style="margin: 0px; padding-left: 10px;">@b.Quest.Name</h4>
                             </td>
                             <td class="p-value">
-                                @Html.Stars(b.Quest.Complexity)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-value">
-                                @b.Quest.Persons
+                                <small>@Html.Stars(b.Quest.Complexity)</small>
                             </td>
                         </tr>
                         <tr>
                             <td class="p-value">
-                                @b.Quest.Duration.TotalMinutes
-                                @Resources.Strings.Min
+                                <small>@b.Quest.Persons</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-value">
+                                <small>@b.Quest.Duration.TotalMinutes @Resources.Strings.Min</small>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <p>
+        <div class="col-md-8 col-sm-7">
+            <p style="margin-top: 10px;">
                 @Resources.Strings.Time
                 :
             </p>
@@ -97,12 +119,20 @@
                 {
                     var attrs = new Dictionary<string, object> { { "class", "btn btn-warning" } };
                     var text = t.BeginTime.ToString("hh\\:mm");
-                    
-                    
-                    if (t.Booked) { attrs.Add("disabled", "disabled"); }
 
-                    if (!t.Booked)
+
+                    if (t.Booked)
                     {
+                        attrs.Add("disabled", "disabled");
+                    }
+
+                    if (t.Booked || (t.BeginTime < DateTime.Now.TimeOfDay && DateTime.Now.Date == Model.SelectedDate))
+                    {
+                        <span class="btn btn-warning disabled">@text</span>
+                    }
+                    else
+                    {
+
                         var routeValues = new RouteValueDictionary
                         {
                             {"questId", b.Quest.Id},
@@ -111,18 +141,17 @@
                         };
 
                         @Html.RouteLink(text, "Confirm", routeValues, attrs)
-
-                    }
-                    else
-                    {
-                        <span class="btn btn-warning disabled">@text</span>
                     }
                 }
-                
+
             </div>
-            <p style="margin-top: 20px;">
-                @Html.ActionLink(Resources.Strings.Details, "Index", "Info")
+            <p style="margin-top: 10px; margin-bottom: 20px;">
+                @Html.ActionLink(Resources.Strings.Details, "Index", "Info", null, null, "quest" + b.Quest.Id, null, null)
             </p>
         </div>
     </div>
+}
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/schedule")
 }

@@ -31,8 +31,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 @Html.Partial("_NavMenu")
-                
+
                 <p class="navbar-text navbar-right">
+                    <span style="padding-right: 30px; color: #faa123;">
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true" style="padding-right: 5px;"></span>
+                        911-5555555
+                    </span>
                     @if (culture == "en-US")
                     {
                         <a href="#" class="navbar-link" onclick="setLang('ru'); return false;">РУС</a>
@@ -53,9 +57,10 @@
     <div class="container" style="padding-top: 80px;">
         @RenderBody()
     </div>
-
-
-    
-        @Scripts.Render("~/Scripts/common")
+    @Scripts.Render("~/Scripts/common")
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts");
+    }
 </body>
 </html>

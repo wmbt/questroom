@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как В течении часа с вами свяжется оператор и подтвердит бронь.
+        ///   Ищет локализованную строку, такую же, как Вам на почту отправлено письмо с полной информацией по Вашему бронированию.
         /// </summary>
         internal static string BookingCompleteMessage {
             get {
@@ -160,7 +160,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Отзывы.
+        ///   Ищет локализованную строку, такую же, как Комментарии.
         /// </summary>
         internal static string Comments {
             get {
@@ -174,6 +174,15 @@ namespace Resources {
         internal static string Complexity {
             get {
                 return ResourceManager.GetString("Complexity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Подтверждение бронирования.
+        /// </summary>
+        internal static string ConfirmBooking {
+            get {
+                return ResourceManager.GetString("ConfirmBooking", resourceCulture);
             }
         }
         
@@ -295,20 +304,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как пт.-сб..
-        /// </summary>
-        internal static string FriSat {
-            get {
-                return ResourceManager.GetString("FriSat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, такую же, как Вернуться к бронированию.
         /// </summary>
         internal static string GotoBooking {
             get {
                 return ResourceManager.GetString("GotoBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Информация.
+        /// </summary>
+        internal static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
             }
         }
         
@@ -345,15 +354,6 @@ namespace Resources {
         internal static string Min {
             get {
                 return ResourceManager.GetString("Min", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, такую же, как пн.-чт..
-        /// </summary>
-        internal static string MonThru {
-            get {
-                return ResourceManager.GetString("MonThru", resourceCulture);
             }
         }
         
@@ -466,7 +466,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Стоимость.
+        ///   Ищет локализованную строку, такую же, как Стоимость, руб..
         /// </summary>
         internal static string Price {
             get {
@@ -552,6 +552,33 @@ namespace Resources {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как сб.-вс..
+        /// </summary>
+        internal static string Weekends {
+            get {
+                return ResourceManager.GetString("Weekends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как пн.-пт. до 17:00.
+        /// </summary>
+        internal static string WorkdaysDay {
+            get {
+                return ResourceManager.GetString("WorkdaysDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как пн.-пт. после 17:00.
+        /// </summary>
+        internal static string WorkdaysEvening {
+            get {
+                return ResourceManager.GetString("WorkdaysEvening", resourceCulture);
             }
         }
     }

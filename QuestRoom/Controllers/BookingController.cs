@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading;
 using System.Web.Mvc;
 using QuestRoom.Models;
 using QuestRoom.Types;
@@ -43,7 +44,15 @@ namespace QuestRoom.Controllers
                     {
                         Quest = quest,
                         Costs = costs,
-                        Prices = costs.Select(x => new SelectListItem { Text = x.Persons, Value = x.Workdays.ToString() }),
+                        Prices = costs.Select(x => new SelectListItem
+                        {
+                            Text = x.Persons, 
+                            Value = bDate.DayOfWeek == DayOfWeek.Saturday || bDate.DayOfWeek == DayOfWeek.Sunday 
+                            ? x.Weekends.ToString() 
+                            : (bTime < new TimeSpan(0, 17, 0, 0) 
+                                ? x.WorkdaysDay.ToString() 
+                                : x.WorkdaysEvening.ToString())
+                        }),
                         SelectedDate = bDate,
                         SelectedTime = bTime
                     };
@@ -86,7 +95,7 @@ namespace QuestRoom.Controllers
                     var quest = Provider.GetQuest(questId);
                     try
                     {
-                        MessageToPlayer(model.Email, model.PlayerName, quest.Name, selectedDate + selectedTime);
+                        MessageToPlayer(model.Email, model.PlayerName, quest.Name, selectedDate + selectedTime, model.Price);
                         MessageToAdmins();
                     }
                     catch { }
@@ -108,8 +117,8 @@ namespace QuestRoom.Controllers
             
             var minDate = DateTime.Now.Date;
             var maxDate = minDate + new TimeSpan(45, 0, 0, 0);
-            var defaultDaysCount = new TimeSpan(3, 0, 0, 0);
-            var jumpOffset = new TimeSpan(7, 0, 0, 0);
+            var defaultDaysCount = new TimeSpan(2, 0, 0, 0);
+            var jumpOffset = new TimeSpan(5, 0, 0, 0);
           
 
             if (string.IsNullOrEmpty(date))
@@ -177,10 +186,14 @@ namespace QuestRoom.Controllers
             return View(model);
         }
 
-        private void MessageToPlayer(string email, string playername, string questName, DateTime questTime)
+        private void MessageToPlayer(string email, string playername, string questName, DateTime questTime, int price)
         {
-            var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/MessageToPlayer.txt"));
-            var body = string.Format(bodyTemplate, playername, questName, questTime.ToString("d MMMM yyyy"));
+            var fileName = Thread.CurrentThread.CurrentCulture.Name == "en-US"
+                ? "MessageToPlayer.en.txt"
+                : "MessageToPlayer.txt";
+
+            var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/" + fileName));
+            var body = string.Format(bodyTemplate, playername, questName, questTime.ToString("d MMMM yyyy"), price);
             var subject = string.Format("Бронирование квеста \"{0}\"", questName);
             SendEmail(body, subject, new [] { email});
         }

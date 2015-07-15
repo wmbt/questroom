@@ -4,12 +4,13 @@
             deleteCookie("lang");
             break;
         case "en":
-            setCookie("lang", "en");
+            setCookie("lang", "en", {path : "/"});
             break;
         default:
             return;
     }
     location.reload();
+    return false;
 }
 
 function getCookie(name) {
@@ -52,6 +53,7 @@ function setCookie(name, value, options) {
 
 function deleteCookie(name) {
     setCookie(name, "", {
-        expires: -1
+        expires: -1,
+        path: "/"
     });
 }

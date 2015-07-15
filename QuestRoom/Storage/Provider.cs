@@ -143,7 +143,7 @@ namespace QuestRoom.Storage
 
         public Cost[] GetCosts()
         {
-            const string query = "select * from Cost order by Id";
+            const string query = "select * from Cost where InHistory = 0 order by Id";
             var items = GetItems(query, x => new Cost(x));
 
             return items.ToArray();
@@ -209,7 +209,7 @@ namespace QuestRoom.Storage
                     new SqlParameter("@PlayerName", name),
                     new SqlParameter("@Email", email),
                     new SqlParameter("@Phone", phone),
-                    new SqlParameter("@Comment", comments)
+                    new SqlParameter("@Comment", comments ?? (object)DBNull.Value)
                 });
                 addBookingCommand.ExecuteNonQuery();
                 trn.Commit();

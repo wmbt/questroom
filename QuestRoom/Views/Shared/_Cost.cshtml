@@ -2,16 +2,18 @@
 <h4>@Resources.Strings.Cost</h4>
 <table class="blocks-table costs">
     <tr>
-        <th></th>
-        <th>@Resources.Strings.MonThru</th>
-        <th>@Resources.Strings.FriSat</th>
+        <th class="first"></th>
+        <th class="second">@Resources.Strings.WorkdaysDay</th>
+        <th class="third">@Resources.Strings.WorkdaysEvening</th>
+        <th class="fourty">@Resources.Strings.Weekends</th>
     </tr>
     @foreach (var c in Model)
     {
         <tr>
             <td class="first">@string.Format("{0} {1}", c.Persons, Resources.Strings.Pers)</td>
-            <td>@string.Format("{0} {1}", c.Workdays, Resources.Strings.Rub)</td>
-            <td>@string.Format("{0} {1}", c.Weekends, Resources.Strings.Rub)</td>
+            <td class="second">@string.Format("{0} {1}", c.WorkdaysDay, Resources.Strings.Rub)</td>
+            <td class="third">@string.Format("{0} {1}", c.WorkdaysEvening, Resources.Strings.Rub)</td>
+            <td class="fourty">@string.Format("{0} {1}", c.Weekends, Resources.Strings.Rub)</td>
         </tr>
     }
 </table>

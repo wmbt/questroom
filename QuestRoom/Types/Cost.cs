@@ -7,14 +7,16 @@ namespace QuestRoom.Types
     {
         public int Id { get; set; }
         public string Persons { get; set; }
-        public int Workdays { get; set; }
+        public int WorkdaysEvening { get; set; }
+        public int WorkdaysDay { get; set; }
         public int Weekends { get; set; }
 
         public Cost(IDataRecord dr)
         {
             Id = dr.GetValueOrDefault<int>("Id");
             Persons = dr.GetValueOrDefault<string>("Persons");
-            Workdays = dr.GetValueOrDefault<int>("Workdays");
+            WorkdaysDay = dr.GetValueOrDefault<int>("WorkdaysDay");
+            WorkdaysEvening = dr.GetValueOrDefault<int>("WorkdaysEvening");
             Weekends = dr.GetValueOrDefault<int>("Weekends");
         }
     }

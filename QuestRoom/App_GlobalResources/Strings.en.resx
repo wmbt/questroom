@@ -150,11 +150,11 @@
   <data name="Persons" xml:space="preserve">
     <value>Persons</value>
   </data>
-  <data name="FriSat" xml:space="preserve">
-    <value>Fr.-Sa.</value>
+  <data name="Weekends" xml:space="preserve">
+    <value>Su.-Sa.</value>
   </data>
-  <data name="MonThru" xml:space="preserve">
-    <value>Mo.-Th.</value>
+  <data name="WorkdaysDay" xml:space="preserve">
+    <value>Mo.-Fr. before 17:00</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Price</value>
@@ -205,12 +205,75 @@
     <value>Players</value>
   </data>
   <data name="Price" xml:space="preserve">
-    <value>Price</value>
+    <value>Price, rub.</value>
   </data>
   <data name="Quest" xml:space="preserve">
     <value>Quest</value>
   </data>
   <data name="SendBooking" xml:space="preserve">
     <value>Book</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="ConfirmBooking" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="WorkdaysEvening" xml:space="preserve">
+    <value>Mo.-Fr. after 17:00</value>
+  </data>
+  <data name="GotoBooking" xml:space="preserve">
+    <value>Back to booking</value>
+  </data>
+  <data name="FeedbackMessagSuccessMessage" xml:space="preserve">
+    <value>Your comment sucessfully sended and will published after checking</value>
+  </data>
+  <data name="FeedbackMessageSuccessTitle" xml:space="preserve">
+    <value>Comment sucessfully sended</value>
+  </data>
+  <data name="FeedbackMessageFailureTitle" xml:space="preserve">
+    <value>Comment sending error</value>
+  </data>
+  <data name="FeedbackMessageFailureMessage" xml:space="preserve">
+    <value>Comment can be write by users who play in the game. By your email not found confirmed booking.</value>
+  </data>
+  <data name="BookingFailureTitle" xml:space="preserve">
+    <value>Booking error</value>
+  </data>
+  <data name="BookingFailureMessage" xml:space="preserve">
+    <value>Invalid date and time</value>
+  </data>
+  <data name="BookingCompleteTitle" xml:space="preserve">
+    <value>Booking complete</value>
+  </data>
+  <data name="BookingCompleteMessage" xml:space="preserve">
+    <value>Detail information sended to your email</value>
+  </data>
+  <data name="BookingBookedTitle" xml:space="preserve">
+    <value>Booking not complete</value>
+  </data>
+  <data name="BookingBookedMessage" xml:space="preserve">
+    <value>These date and time now booked</value>
+  </data>
+  <data name="SendFeedbackMessage" xml:space="preserve">
+    <value>Send comment</value>
+  </data>
+  <data name="PhFeedbackText" xml:space="preserve">
+    <value>Enter comment</value>
+  </data>
+  <data name="FeedbackText" xml:space="preserve">
+    <value>Comment text</value>
+  </data>
+  <data name="FeedbackMessageForm" xml:space="preserve">
+    <value>Add comment</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="AddFeedbackMessage" xml:space="preserve">
+    <value>Add comment</value>
   </data>
 </root>
