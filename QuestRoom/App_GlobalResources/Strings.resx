@@ -139,7 +139,7 @@
     <value>Контакты</value>
   </data>
   <data name="Cost" xml:space="preserve">
-    <value>Стоимость одной игры</value>
+    <value>Стоимость</value>
   </data>
   <data name="DateTime" xml:space="preserve">
     <value>Дата и время</value>
@@ -211,13 +211,13 @@
     <value>Расписание</value>
   </data>
   <data name="Time" xml:space="preserve">
-    <value>Время</value>
+    <value>Выберите время</value>
   </data>
   <data name="AddFeedbackMessage" xml:space="preserve">
-    <value>Добавить отзыв</value>
+    <value>Добавить комментарий</value>
   </data>
   <data name="Feedback" xml:space="preserve">
-    <value>Отзывы</value>
+    <value>Комментарии</value>
   </data>
   <data name="FeedbackMessageForm" xml:space="preserve">
     <value>Добавление отзыва</value>
@@ -290,5 +290,8 @@
   </data>
   <data name="WorkdaysEvening" xml:space="preserve">
     <value>пн.-пт. после 17:00</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
 </root>

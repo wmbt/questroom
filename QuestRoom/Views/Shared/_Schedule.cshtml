@@ -1,0 +1,41 @@
+﻿@using Newtonsoft.Json
+@model QuestRoom.Models.QuestScheduleViewModel
+
+@{
+    var title = string.Format("{0} {1}", Resources.Strings.BookingOn, Model.SelectedDate.ToString("d MMMM yyyy"));
+    var btnGroupId = "schedule" + Model.QuestSchedule.Quest.Id;
+}
+
+
+<div class="btn-group" id="@btnGroupId">
+    <input type="hidden" value="@title" />
+    @foreach (var t in Model.QuestSchedule.Schedule)
+                {
+                    var attrs = new Dictionary<string, object> {{"class", "btn btn-warning"}};
+                    var text = t.BeginTime.ToString("hh\\:mm");
+
+
+                    if (t.Booked)
+                    {
+                        attrs.Add("disabled", "disabled");
+                    }
+
+                    if (t.Booked || (t.BeginTime < DateTime.Now.TimeOfDay && DateTime.Now.Date == Model.SelectedDate))
+                    {
+                        <span class="btn btn-warning disabled">@text</span>
+                    }
+                    else
+                    {
+
+                        var routeValues = new RouteValueDictionary
+                        {
+                            {"questId", Model.QuestSchedule.Quest.Id},
+                            {"date", Model.SelectedDate.ToString("ddMMyy")},
+                            {"time", t.BeginTime.ToString("hhmm")}
+                        };
+
+                        @Html.RouteLink(text, "Confirm", routeValues, attrs)
+                    }
+                }
+
+</div>

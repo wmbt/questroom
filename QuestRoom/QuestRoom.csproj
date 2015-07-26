@@ -185,6 +185,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestScheduleViewModel.cs" />
     <Compile Include="Types\Booking.cs" />
     <Compile Include="Types\FeedbackMessageStatus.cs" />
     <Compile Include="Types\QuestSchedule.cs" />
@@ -227,6 +228,7 @@
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Feedback\AddMessageResult.cshtml" />
     <Content Include="Views\Feedback\AddMessage.cshtml" />
+    <Content Include="Views\Shared\_Schedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

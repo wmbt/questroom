@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h2 class="pull-left">@Resources.Strings.Feedback</h2>
+        <h3 class="pull-left yellow">@Resources.Strings.Feedback</h3>
         @Html.ActionLink(Resources.Strings.AddFeedbackMessage, "AddMessage", null, new {@class = "btn btn-warning pull-right feedback-button"})
     </div>
 </div>
@@ -13,8 +13,8 @@
 {
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2>@m.QuestName</h2>
-            <h4>@string.Format("{0}, {1}", m.PlayerName, m.Created.ToString("dd MMMM yyyy"))</h4>
+            <h3 class="yellow">@m.QuestName</h3>
+            <h5>@string.Format("{0}, {1}", m.PlayerName, m.Created.ToString("dd MMMM yyyy"))</h5>
             <p>@m.Text</p>
         </div>
     </div>

@@ -43,7 +43,9 @@
 }
 table.costs {
     background: transparent !important;
-    width: 100%;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 table.costs th {
     padding-bottom: 3px !important;
@@ -51,6 +53,7 @@ table.costs th {
 }
 table.costs td.first {
     color: #faa123;
+    padding-right: 20px;
 }
 table.costs td.first, th.first {
     width: auto;

@@ -172,7 +172,7 @@
     <value>Booking on</value>
   </data>
   <data name="Time" xml:space="preserve">
-    <value>Time</value>
+    <value>Select time</value>
   </data>
   <data name="DateTime" xml:space="preserve">
     <value>Date and time</value>
@@ -275,5 +275,8 @@
   </data>
   <data name="AddFeedbackMessage" xml:space="preserve">
     <value>Add comment</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
   </data>
 </root>

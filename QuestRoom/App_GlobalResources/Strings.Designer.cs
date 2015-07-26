@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Добавить отзыв.
+        ///   Ищет локализованную строку, такую же, как Добавить комментарий.
         /// </summary>
         internal static string AddFeedbackMessage {
             get {
@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Закрыть.
+        /// </summary>
+        internal static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Комментарии.
         /// </summary>
         internal static string Comments {
@@ -196,7 +205,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Стоимость одной игры.
+        ///   Ищет локализованную строку, такую же, как Стоимость.
         /// </summary>
         internal static string Cost {
             get {
@@ -241,7 +250,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Отзывы.
+        ///   Ищет локализованную строку, такую же, как Комментарии.
         /// </summary>
         internal static string Feedback {
             get {
@@ -538,7 +547,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Время.
+        ///   Ищет локализованную строку, такую же, как Выберите время.
         /// </summary>
         internal static string Time {
             get {

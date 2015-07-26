@@ -6,13 +6,34 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI.WebControls;
 using QuestRoom.Models;
+using QuestRoom.Storage;
 using QuestRoom.Types;
 
 namespace QuestRoom.Controllers
 {
     public class BookingController : QuestRoomController
     {
+        [HttpGet]
+        public ActionResult Schedule(int questId, string date)
+        {
+            var selectedDate = DateTime.ParseExact(date, "ddMMyy", CultureInfo.InvariantCulture);
+            var quest = Provider.GetQuest(questId);
+            var schedule = Provider.GetPeriods(quest.Id, selectedDate);
+            return PartialView("_Schedule", new QuestScheduleViewModel
+            {
+               SelectedDate = selectedDate,
+               QuestSchedule = new QuestSchedule
+               {
+                   Quest = quest,
+                   Schedule = schedule
+               }
+            });
+        }
+
+
         [HttpGet]
         public ActionResult Confirm(int questId, string date, string time)
         {

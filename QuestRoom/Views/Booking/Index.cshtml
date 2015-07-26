@@ -2,6 +2,7 @@
 @using System.Threading
 @using System.Web.Optimization
 @using Newtonsoft.Json
+@using QuestRoom.Models
 @using QuestRoom.Types
 @model QuestRoom.Models.SchedulesViewModel
 @{
@@ -18,14 +19,14 @@
         window.endDate = new Date(@Html.Raw(JsonConvert.SerializeObject(DateTime.Now.AddMonths(1))));
     </script>
 }
-<div class="row" style="padding-bottom: 50px;">
+@*<div class="row" style="padding-bottom: 50px;">
     <div class="col-md-4 col-sm-5">
-        @Html.Partial("_Cost", Model.Costs)
+
     </div>
-    <div class="col-md-7 col-sm-7">
-        <h4 class="booking">@string.Format("{0} {1}", Resources.Strings.BookingOn, Model.SelectedDate.ToString("d MMMM yyyy"))</h4>
-        <p style="margin-top: 20px;">@Resources.Strings.SelectDate</p>
-        <nav>
+    <div class="col-md-7 col-sm-7">*@
+        
+        
+        @*<nav>
             <ul class="pagination" style="margin-top: 0px; margin-bottom: 0px;">
                 @{
                     var cls = Model.JumpPrevDate == Model.CurrentMinDate ? "disabled" : string.Empty;
@@ -67,16 +68,11 @@
                     }
                 </li>
             </ul>
-        </nav>
+        </nav>*@
         @*<input type="text" class="form-control" id="datePicker" style="width: 150px; margin-top: 10px;"/>*@
-        <div class="input-group date" style="width: 150px; margin-top: 10px;">
-            <input type="text" class="form-control">
-            <span class="input-group-addon" style="cursor: pointer;">
-                <i class="glyphicon glyphicon-th"></i>
-            </span>
-        </div>
-    </div>
-</div>
+        
+    @*</div>
+</div>*@
 
 @foreach (var b in Model.QuestSchedules)
 {
@@ -110,14 +106,31 @@
             </div>
         </div>
         <div class="col-md-8 col-sm-7">
+            @{
+                var titleId = "title" + b.Quest.Id;
+            }
+            <h4 class="booking" id="@titleId">@string.Format("{0} {1}", Resources.Strings.BookingOn, Model.SelectedDate.ToString("d MMMM yyyy"))</h4>
+            <p style="margin-top: 20px;">@Resources.Strings.SelectDate</p>
+            <div class="input-group date" style="width: 150px; margin-top: 10px;" id="@b.Quest.Id">
+                <input type="text" class="form-control">
+                <span class="input-group-addon" style="cursor: pointer;">
+                    <i class="glyphicon glyphicon-th"></i>
+                </span>
+            </div>
+
             <p style="margin-top: 10px;">
                 @Resources.Strings.Time
                 :
             </p>
-            <div class="btn-group">
+            @Html.Partial("_Schedule", new QuestScheduleViewModel
+            {
+                SelectedDate = Model.SelectedDate,
+                QuestSchedule = b
+            })
+            @*<div class="btn-group">
                 @foreach (var t in b.Schedule)
                 {
-                    var attrs = new Dictionary<string, object> { { "class", "btn btn-warning" } };
+                    var attrs = new Dictionary<string, object> {{"class", "btn btn-warning"}};
                     var text = t.BeginTime.ToString("hh\\:mm");
 
 
@@ -144,13 +157,33 @@
                     }
                 }
 
-            </div>
-            <p style="margin-top: 10px; margin-bottom: 20px;">
-                @Html.ActionLink(Resources.Strings.Details, "Index", "Info", null, null, "quest" + b.Quest.Id, null, null)
+            </div>*@
+            <p style="margin-top: 20px; margin-bottom: 20px;">
+                @Html.ActionLink(Resources.Strings.Details, "Index", "Info", null, null, "quest" + b.Quest.Id, null, new {@class = "btn btn-warning"})
+                <button data-toggle="modal" data-target="#price" type="button" class="btn btn-warning">@Resources.Strings.Cost</button>
             </p>
         </div>
     </div>
 }
+
+<div class="modal" id="price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title yellow" id="myModalLabel">@Resources.Strings.Cost</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_Cost", Model.Costs)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Strings.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts
 {
     @Scripts.Render("~/Scripts/schedule")
