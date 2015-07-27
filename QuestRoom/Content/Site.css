@@ -16,10 +16,11 @@
 }
 
 .blocks-table {
-            border: none;
-            border-spacing: 0px;
-            border-collapse: collapse;
-        }
+    border: none;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    background-color: transparent;
+}
 .blocks-table > tbody > tr > td, .blocks-table > tbody > tr > th
 {
     padding: 0;
@@ -36,10 +37,10 @@
 }
 
 .p-name {
-    width: 70%;
+    width: 10%;
 }
 .p-value {
-    width: 30%;   
+    width: 90%;   
 }
 table.costs {
     background: transparent !important;
@@ -73,6 +74,9 @@ h4.booking {
 }
 h3.yellow {
     color: #faa123 !important;
+}
+a.yellow {
+        color: #faa123 !important;
 }
 
 .form-control-feedback {
@@ -116,4 +120,28 @@ a.anchor {
   background-image: -webkit-linear-gradient(#808080, #9e9e9e 40%, #b2b2b2)  !important;
   background-image: -o-linear-gradient(#808080, #9e9e9e 40%, #b2b2b2)  !important;
   background-image: -ms-linear-gradient(#808080, #9e9e9e 40%, #b2b2b2)  !important;
+}
+
+
+.modal-content {
+    background-color: lightblue !important;
+}
+
+.modal-body td {
+    color: black !important;
+}
+
+.modal-body th, td.first {
+    color: dimgray  !important;
+}
+
+.quest-props td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14pt;
+}
+
+.quest-props {
+    margin-top: 20px;
+    margin-bottom: 40px;
 }

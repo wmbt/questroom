@@ -33,7 +33,7 @@
             <tr>
                 <th>№</th>
                 <th>Квест</th>
-                <th>Дата</th>
+                <th>Время</th>
                 @*<th>Время</th>*@
                 <th>Имя</th>
                 <th>Email</th>
@@ -64,6 +64,14 @@
                     }
 
                 }
+                else if (b.Status == BookingStatus.Canceled)
+                {
+                    var provider = new Provider();
+                    if (provider.IsDateAndTimeFree(b.QuestId, b.Date))
+                    {
+                        canConfirm = String.Empty;
+                    }
+                }
 
                 <tr id="@b.Id">
                     <td>@b.Id</td>
@@ -77,10 +85,10 @@
                     <td>@b.Created.ToString("dd.MM.yyy HH:mm")</td>
                     <td class="processed">@processed</td>
                     <td style="width: 100px;">
-                        <button class="btn btn-default btn-sm confirm" type="button" title="Подтвердить" @Html.Raw(canConfirm)>
+                        <button class="btn btn-default btn-sm confirm" type="button" title="Подтвердить бронирование" @Html.Raw(canConfirm)>
                             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
                         </button>
-                        <button class="btn btn-danger btn-sm cancel" type="button" title="Отменить" @Html.Raw(canCancel)>
+                        <button class="btn btn-danger btn-sm cancel" type="button" title="Отменить бронирование" @Html.Raw(canCancel)>
                             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                         </button>
                     </td>

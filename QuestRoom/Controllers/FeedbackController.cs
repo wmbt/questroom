@@ -8,34 +8,35 @@ namespace QuestRoom.Controllers
     public class FeedbackController : QuestRoomController
     {
         // GET: Feedback
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult Index()
         {
             var messages = Provider.GetConfirmedFeedbackMessages();
             return View(messages);
-        }
+        }*/
 
-        [HttpGet]
-        public ActionResult AddMessage()
+        public ActionResult AddMessage(int questId)
         {
-            var quests = Provider.GetQuests();
+            var quest = Provider.GetQuest(questId);
             return View("AddMessage", new FeedbackMessageViewModel()
             {
-                Quests = quests.Select(x => new SelectListItem()
+                Quest = quest
+                /*Quests = quests.Select(x => new SelectListItem()
                 {
                     Text = x.Name,
                     Value = x.Id.ToString()
-                })
+                })*/
             });
         }
 
         [HttpPost]
         public ActionResult AddMessage(FeedbackMessageViewModel model)
         {
+            var questId = int.Parse(Request.QueryString["questId"]);
             var email = model.Email.Trim();
             var msg = model.Text.Trim();
 
-            if (!Provider.AddFeedbackMessage(model.QuestId, email, msg))
+            if (!Provider.AddFeedbackMessage(questId, email, msg))
             {
                 return View("AddMessageResult", new FeedbackMessageResultViewModel
                 {

@@ -5,16 +5,16 @@
 }
 <div class="row">
     <div class="col-md-6 col-md-offset-3" style="padding-bottom: 50px;">
-        <h2>@Resources.Strings.FeedbackMessageForm</h2>
+        <h3 class="yellow">@Resources.Strings.FeedbackMessageForm</h3>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        @using (Html.BeginForm("AddMessage", "Feedback", FormMethod.Post, new {onsubmit = "return vaidateForm()"}))
+        @using (Html.BeginForm("AddMessage", "Feedback", new { questId = Model.Quest.Id } ,FormMethod.Post, new {onsubmit = "return vaidateForm()"}))
         {
             <div class="form-group col-md-12">
-                @Html.LabelFor(x => x.QuestId, Resources.Strings.Quest)
-                @Html.DropDownListFor(x => x.QuestId, Model.Quests, new {@class = "form-control"})
+                @Html.LabelFor(x => x.Quest.Id, Resources.Strings.Quest)
+                @Html.TextBoxFor(x => x.Quest.Name, new {@class = "form-control", disabled = "disabled"})
             </div>
 
             <div class="form-group col-md-12 has-feedback">

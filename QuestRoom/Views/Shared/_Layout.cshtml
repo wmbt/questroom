@@ -27,7 +27,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Quest Rooms</a>
+                @Html.RouteLink("Quest Rooms", "Default", new { action = "Index", controller = "Booking" }, new { @class = "navbar-brand" })
+                @*<a class="navbar-brand" href="#">Quest Rooms</a>*@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 @Html.Partial("_NavMenu")
@@ -35,7 +36,7 @@
                 <p class="navbar-text navbar-right">
                     <span style="padding-right: 30px; color: #faa123;">
                         <span class="glyphicon glyphicon-earphone" aria-hidden="true" style="padding-right: 5px;"></span>
-                        911-5555555
+                        @Resources.Strings.PhoneNmb
                     </span>
                     @if (culture == "en-US")
                     {
@@ -51,12 +52,21 @@
                     }
                 </p>
             </div><!--/.nav-collapse -->
-            
+
         </div>
     </nav>
     <div class="container" style="padding-top: 80px;">
         @RenderBody()
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-center" style="padding-bottom: 20px; padding-top: 20px;">
+                <small>QuestRooms @DateTime.Now.Year.ToString(). @Resources.Strings.Footer.</small>
+            </p>
+        </div>
+    </footer>
+                
     @Scripts.Render("~/Scripts/common")
     @if (IsSectionDefined("Scripts"))
     {

@@ -121,7 +121,7 @@
     <value>О квестах</value>
   </data>
   <data name="Book" xml:space="preserve">
-    <value>Забронировать</value>
+    <value>Бронирование on-line</value>
   </data>
   <data name="BookingOn" xml:space="preserve">
     <value>Бронирование на</value>
@@ -293,5 +293,26 @@
   </data>
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Все права защищены</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="CommentsForQuest" xml:space="preserve">
+    <value>Комментарии к квесту</value>
+  </data>
+  <data name="PhoneNmb" xml:space="preserve">
+    <value>911-5555555</value>
+  </data>
+  <data name="ShortAddress" xml:space="preserve">
+    <value>ул. Смолячкова 14 корпус 4</value>
+  </data>
+  <data name="WebSite" xml:space="preserve">
+    <value>Веб-сайт</value>
+  </data>
+  <data name="QuestBooking" xml:space="preserve">
+    <value>Бронирование квеста</value>
   </data>
 </root>

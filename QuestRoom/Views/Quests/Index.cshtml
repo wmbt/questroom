@@ -1,0 +1,111 @@
+﻿@using QuestRoom.Types
+@model QuestRoom.Models.QuestViewModel
+
+@{
+    ViewBag.Title = Model.Quest.Name;
+    var q = Model.Quest;
+}
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-offset-1 col-md-4 col-sm-5 col-lg-3 col-lg-offset-1">
+        <div class="img-thumbnail thumbnail-with-text">
+            <img src="@Url.Content("~/Content/Images/q" + q.Id + ".jpg")" alt="@q.Name">
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-7 col-lg-8">
+        <h3 class="yellow">@Resources.Strings.Quest "@q.Name"</h3>
+        <table class="blocks-table quest-props">
+            <tr>
+                <td class="p-value">
+                    @Html.Stars(q.Complexity)
+                </td>
+            </tr>
+            <tr>
+                <td class="p-value">
+                    <i class="fa fa-male"></i>&nbsp;&nbsp;&nbsp;@q.Persons
+                </td>
+            </tr>
+            <tr>
+                <td class="p-value">
+                    <i class="fa fa-clock-o"></i>&nbsp;&nbsp;@q.Duration.TotalMinutes @Resources.Strings.Min
+                </td>
+            </tr>
+        </table>
+        <h3>@Resources.Strings.Contacts</h3>
+        <hr style="margin-top: 5px;"/>
+        <table class="blocks-table" style="margin-bottom: 40px;">
+            <tr>
+                <td style="padding-right: 15px;"><i class="fa fa-laptop"></i></td>
+                <td>
+                    @Html.RouteLink(Resources.Strings.WebSite, "Default", new { action = "Index", controller = "Booking" })
+                </td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-phone"></i></td>
+                <td>@Resources.Strings.PhoneNmb</td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-map-marker"></i></td>
+                <td>@Html.ActionLink(Resources.Strings.ShortAddress, "Index", "Contacts")</td>
+            </tr>
+        </table>
+        <h3>@Resources.Strings.Description</h3>
+        <hr style="margin-top: 5px;"/>
+        <p style="margin-bottom: 40px;">@q.Description</p>
+        @Html.ActionLink(
+            Resources.Strings.Book,
+            "Index",
+            "Booking",
+            null,
+            null,
+            "quest" + q.Id,
+            null,
+            new {@class = "btn btn-warning btn-lg"})
+
+        @*@Html.ActionLink(@Resources.Strings.Comments, "Index", "Feedback", null, new {@class = "btn btn-warning"})*@
+    </div>
+</div>
+<div class="row" style="margin-top: 40px; margin-bottom: 30px;">
+    <div class="col-md-12">
+        <hr style="margin-top: 5px;"/>
+        <h3>@Resources.Strings.CommentsForQuest "@q.Name"</h3>
+        <h5>@Html.ActionLink(Resources.Strings.AddFeedbackMessage, "AddMessage", "Feedback", new {questId = q.Id}, null)</h5>
+    </div>
+</div>
+@{
+    var rowsCount = Math.Ceiling(Model.Comments.Length / 3.0);
+    var colsCount = 3;
+    var k = 0;
+    var comm = Model.Comments;
+}
+
+@for (var i = 0; i < rowsCount; i++)
+{
+    <div class="row">
+        @for (var j = 0; j < colsCount; j++, k++)
+        {
+            if (k < comm.Length)
+            {
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">@comm[k].PlayerName</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>@comm[k].Text</p>        
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                break;
+            }
+        }
+    </div>
+}
+
+
+
+
+

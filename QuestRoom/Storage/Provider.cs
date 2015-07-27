@@ -46,7 +46,14 @@ namespace QuestRoom.Storage
             var items = GetItems(query, x => x.GetValueOrDefault<string>("Email"));
             return items.ToArray();
         }
-        
+
+        public bool IsDateAndTimeFree(int questId, DateTime dateTime)
+        {
+            var result = GetScalar(IsFreeQuery,
+                new[] {new SqlParameter("@DateTime", dateTime), new SqlParameter("@QuestId", questId)});
+            
+            return (int)result > 0;
+        }
         
         public Booking[] GetBookings(string email)
         {
@@ -247,6 +254,13 @@ namespace QuestRoom.Storage
         {
             var query = string.Format(MessagesQuery, "1 = 1");
             var items = GetItems(query, x => new FeedbackMessage(x));
+            return items.ToArray();
+        }
+
+        public FeedbackMessage[] GetFeedbackMessages(int questId)
+        {
+            var query = string.Format(MessagesQuery, "f.QuestId = @QuestId");
+            var items = GetItems(query, new SqlParameter("@QuestId", questId),x => new FeedbackMessage(x));
             return items.ToArray();
         }
 

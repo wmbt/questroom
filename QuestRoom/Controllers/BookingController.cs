@@ -214,8 +214,9 @@ namespace QuestRoom.Controllers
                 : "MessageToPlayer.txt";
 
             var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/" + fileName));
-            var body = string.Format(bodyTemplate, playername, questName, questTime.ToString("d MMMM yyyy"), price);
-            var subject = string.Format("Бронирование квеста \"{0}\"", questName);
+            var confirmDate = questTime.Date == DateTime.Now.Date ? DateTime.Now.Date : questTime.Date.AddDays(-1);
+            var body = string.Format(bodyTemplate, playername, questName, questTime.ToString("d MMMM yyyy"), price, confirmDate.ToString("d MMMM"));
+            var subject = string.Format(Resources.Strings.QuestBooking + " \"{0}\"", questName);
             SendEmail(body, subject, new [] { email});
         }
 

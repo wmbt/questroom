@@ -1,4 +1,6 @@
 ﻿Hi, {0}!
 Yo booked quest "{1}" on {2}.
 Quest price {3} rub.
-Shortly operator will call you to confirm your reservation.
+{4} operator will contact you for confirmation. If
+you are unable to call during the day, the booking will be considered
+unconfirmed and your order will be canceled.

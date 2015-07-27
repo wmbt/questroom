@@ -48,15 +48,15 @@
         </p>
         <p>
             Хотите испытать себя в действии?! Вперед! Найдите убийцу в «квесте»
-            @Html.ActionLink("«Будуар»", "Index", "Info", null, null, "quest1", null, null)
+            @Html.ActionLink("«Будуар»", "Index", "Quests", new {id = 1}, new {@class = "yellow"})
             ,вспомните все -
-            @Html.ActionLink("«Похмелье»", "Index", "Info", null, null, "quest7", null, null)
+            @Html.ActionLink("«Похмелье»", "Index", "Quests", new { id = 7 }, new { @class = "yellow" })
             , спасите себя и друзей после катастрофы -
-            @Html.ActionLink("«Крушение самолета»", "Index", "Info", null, null, "quest2", null, null)
+            @Html.ActionLink("«Крушение самолета»", "Index", "Quests", new { id = 2 }, new { @class = "yellow" })
             , а может быть вам всегда интересно было узнать, что по ту сторону жизни -
-            @Html.ActionLink("«Офис Д…»", "Index", "Info", null, null, "quest9", null, null)
+            @Html.ActionLink("«Офис Д…»", "Index", "Quests", new { id = 9 }, new { @class = "yellow" })
             , что почувствуете, узнав, что среди вас предатель -
-            @Html.ActionLink("«Двойной агент»", "Index", "Info", null, null, "quest5", null, null)
+            @Html.ActionLink("«Двойной агент»", "Index", "Quests", new { id = 5 }, new { @class = "yellow" })
             . Исход событий зависит от вас! Все решения принимаете именно вы, а не Брюс Уиллис….
             Обезвредить бомбу на последней минуте… почувствуй себя Крепким орешком!
         </p>
@@ -147,8 +147,8 @@
             В комментариях укажите свои пожелания по времени и условиям. Наш оператор свяжется
             с вами и предложит подходящую для вас игру.
         </p>
-        <p>
+        <h3 class="yellow">
             Welcome!!! Рады всем и каждому!
-        </p>
+        </h3>
     </div>
 </div>

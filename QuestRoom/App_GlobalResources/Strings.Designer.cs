@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как Забронировать.
+        ///   Ищет локализованную строку, такую же, как Бронирование on-line.
         /// </summary>
         internal static string Book {
             get {
@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Комментарии к квесту.
+        /// </summary>
+        internal static string CommentsForQuest {
+            get {
+                return ResourceManager.GetString("CommentsForQuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Сложность.
         /// </summary>
         internal static string Complexity {
@@ -219,6 +228,15 @@ namespace Resources {
         internal static string DateTime {
             get {
                 return ResourceManager.GetString("DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Описание.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
@@ -309,6 +327,15 @@ namespace Resources {
         internal static string FeedbackText {
             get {
                 return ResourceManager.GetString("FeedbackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Все права защищены.
+        /// </summary>
+        internal static string Footer {
+            get {
+                return ResourceManager.GetString("Footer", resourceCulture);
             }
         }
         
@@ -457,6 +484,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как 911-5555555.
+        /// </summary>
+        internal static string PhoneNmb {
+            get {
+                return ResourceManager.GetString("PhoneNmb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Введите номер телефона.
         /// </summary>
         internal static string PhPhone {
@@ -489,6 +525,15 @@ namespace Resources {
         internal static string Quest {
             get {
                 return ResourceManager.GetString("Quest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Бронирование квеста.
+        /// </summary>
+        internal static string QuestBooking {
+            get {
+                return ResourceManager.GetString("QuestBooking", resourceCulture);
             }
         }
         
@@ -547,6 +592,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как ул. Смолячкова 14 корпус 4.
+        /// </summary>
+        internal static string ShortAddress {
+            get {
+                return ResourceManager.GetString("ShortAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Выберите время.
         /// </summary>
         internal static string Time {
@@ -561,6 +615,15 @@ namespace Resources {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Веб-сайт.
+        /// </summary>
+        internal static string WebSite {
+            get {
+                return ResourceManager.GetString("WebSite", resourceCulture);
             }
         }
         

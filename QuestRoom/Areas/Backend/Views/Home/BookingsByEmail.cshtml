@@ -46,6 +46,14 @@
                     }
 
                 }
+                else if (b.Status == BookingStatus.Canceled)
+                {
+                    var provider = new QuestRoom.Storage.Provider();
+                    if (provider.IsDateAndTimeFree(b.QuestId, b.Date))
+                    {
+                        canConfirm = String.Empty;
+                    }
+                }
 
                 <tr id="@b.Id">
                     <td>@b.Id</td>

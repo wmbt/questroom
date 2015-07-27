@@ -32,8 +32,8 @@ function onDateChanged(e) {
         },
         success: function(html) {
             $("#schedule" + id).replaceWith(html);
-            var title = $("#schedule" + id + "> input").val();
-            $("#title" + id).text(title);
+            //var title = $("#schedule" + id + "> input").val();
+            //$("#title" + id).text(title);
         }
     });
 }

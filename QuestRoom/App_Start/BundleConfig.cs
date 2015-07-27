@@ -30,6 +30,7 @@ namespace QuestRoom
                 "~/Content/bootstrap-datepicker.css"));
             bundles.Add(new StyleBundle("~/Content/common").Include(
                 "~/Content/bootstrap-slate.css",
+                "~/Content/font-awesome.css",
                 "~/Content/site.css"));
         }
     }

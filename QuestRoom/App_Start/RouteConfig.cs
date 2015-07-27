@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using System.Xml.XPath;
 
 namespace QuestRoom
 {
@@ -45,6 +44,16 @@ namespace QuestRoom
                     { "time", @"\d{4}" }
                 },
                 defaults: new { controller = "Booking", action = "Confirm" }
+            );
+
+            routes.MapRoute(
+                name: "Quests",
+                url: "quests/{id}",
+                constraints: new RouteValueDictionary
+                {
+                    { "id", @"\d{1,2}" }
+                },
+                defaults: new { controller = "Quests", action = "Index" }
             );
 
             

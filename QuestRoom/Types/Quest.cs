@@ -14,7 +14,7 @@ namespace QuestRoom.Types
         public bool Active { get; private set; }
         public bool Visible { get; private set; }
         public string Note { get; private set; }
-
+        
         public Quest(IDataRecord dr)
         {
             Id = dr.GetValueOrDefault<int>("Id");

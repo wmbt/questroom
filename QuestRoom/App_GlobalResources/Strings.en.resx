@@ -133,7 +133,7 @@
     <value>Quests</value>
   </data>
   <data name="Book" xml:space="preserve">
-    <value>Book</value>
+    <value>Online booking</value>
   </data>
   <data name="Comments" xml:space="preserve">
     <value>Comments</value>
@@ -278,5 +278,23 @@
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>All rights reserved</value>
+  </data>
+  <data name="CommentsForQuest" xml:space="preserve">
+    <value>Comments for quest</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ShortAddress" xml:space="preserve">
+    <value>Smolyachkova st. 14, build 4</value>
+  </data>
+  <data name="WebSite" xml:space="preserve">
+    <value>Web-site</value>
+  </data>
+  <data name="QuestBooking" xml:space="preserve">
+    <value>Quest booking</value>
   </data>
 </root>
