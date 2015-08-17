@@ -235,7 +235,18 @@ namespace QuestRoom.Controllers
             var host = ConfigurationManager.AppSettings["SmtpHost"];
             var smtpPort = int.Parse(ConfigurationManager.AppSettings["SmtpPort"]);
             var from = ConfigurationManager.AppSettings["From"];
-            var recipients = string.Join(";", sendTo);
+            //var recipients = string.Join(";", sendTo);
+
+            var mmsg = new MailMessage()
+            {
+                Body = message,
+                Subject = subject,
+                From = new MailAddress(from)
+            };
+            
+            foreach (var s in sendTo)
+                mmsg.To.Add(s);
+            
 
             using (var smtp = new SmtpClient())
             {
@@ -248,9 +259,9 @@ namespace QuestRoom.Controllers
                 smtp.Credentials = credential;
                 smtp.Host = host;
                 smtp.Port = smtpPort;
-                smtp.EnableSsl = true;
+                smtp.EnableSsl = false;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.Send(from, recipients, subject, message);
+                smtp.Send(mmsg);
             }
         }
     }

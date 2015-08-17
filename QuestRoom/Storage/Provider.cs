@@ -42,7 +42,7 @@ namespace QuestRoom.Storage
         }
         public string[] GetUsersEmails()
         {
-            const string query = "select u.Email from Users u where u.Active = 1";
+            const string query = "select distinct lower(LTRIM(RTRIM(u.Email))) as Email from Users u where u.Active = 1";
             var items = GetItems(query, x => x.GetValueOrDefault<string>("Email"));
             return items.ToArray();
         }
