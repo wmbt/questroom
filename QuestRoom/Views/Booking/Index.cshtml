@@ -22,6 +22,11 @@
 
 @foreach (var b in Model.QuestSchedules)
 {
+    if (!b.Quest.Visible)
+    {
+        continue;
+    }
+    
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-4 col-md-offset-1 col-sm-5 col-lg-3 col-lg-offset-1">
             <a class="anchor" name="@string.Format("quest{0}", b.Quest.Id)"></a>
@@ -70,14 +75,39 @@
             @{
                 var titleId = "title" + b.Quest.Id;
             }
-            <h4 class="booking" id="@titleId">@b.Quest.Name</h4>
+
+            @if (b.Quest.Active)
+            {
+                <h4 class="booking" id="@titleId">@b.Quest.Name</h4>
+            }
+            else
+            {
+                <h4 class="booking" id="@titleId">@b.Quest.Name
+                    <span style="color: salmon;">&nbsp;&nbsp;&nbsp;&nbsp;@b.Quest.Note</span>
+            </h4>
+            }
+            
             <p style="margin-top: 20px;">@Strings.SelectDate</p>
-            <div class="input-group date" style="width: 150px; margin-top: 10px;" id="@b.Quest.Id">
-                <input type="text" class="form-control">
-                <span class="input-group-addon" style="cursor: pointer;">
-                    <i class="glyphicon glyphicon-th"></i>
-                </span>
-            </div>
+
+            @if (b.Quest.Active)
+            {
+                <div class="input-group date" style="width: 150px; margin-top: 10px;" id="@b.Quest.Id">
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon" style="cursor: pointer;">
+                        <i class="glyphicon glyphicon-th"></i>
+                    </span>
+                </div>
+            }
+            else
+            {
+                <div class="input-group date disabled" style="width: 150px; margin-top: 10px;" id="@b.Quest.Id">
+                    <input type="text" class="form-control" disabled="disabled">
+                    <span class="input-group-addon" style="cursor: pointer;">
+                        <i class="glyphicon glyphicon-th"></i>
+                    </span>
+                </div>
+            }
+            
 
             <p style="margin-top: 10px;">
                 @Strings.Time
@@ -91,7 +121,15 @@
             <p style="margin-top: 20px; margin-bottom: 20px;">
                 @*@Html.ActionLink(Strings.Details, "Index", "Info", null, null, "quest" + b.Quest.Id, null, new {@class = "btn btn-warning"})*@
                 @Html.RouteLink(Strings.Details, "Quests", new { id = b.Quest.Id }, new { @class = "btn btn-warning" })
-                <button data-toggle="modal" data-target="#price" type="button" class="btn btn-warning">@Strings.Cost</button>
+
+                @if (b.Quest.Active)
+                {
+                    <button data-toggle="modal" data-target="#price" type="button" class="btn btn-warning">@Strings.Cost</button>
+                }
+                else
+                {
+                    <button data-toggle="modal" data-target="#price" disabled="disabled" type="button" class="btn btn-default">@Strings.Cost</button>
+                }
             </p>
         </div>
     </div>

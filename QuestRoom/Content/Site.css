@@ -145,3 +145,15 @@ a.anchor {
     margin-top: 20px;
     margin-bottom: 40px;
 }
+
+.navbar-brand {
+    color: #faa123 !important;
+    font-size: 24px;
+}
+
+.row-canceled {
+    background-color: darkred !important;    
+}
+.row-confirmed {
+    background-color: darkgreen !important;
+}

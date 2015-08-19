@@ -72,6 +72,7 @@ namespace QuestRoom.Areas.Backend.Controllers
             var json = new
             {
                 Changed = true,
+                StatusCode = booking.Status,
                 Status = booking.Status.Description(),
                 Processed = string.Format("{0} ({1})", booking.Processed.Value.ToString("dd.MM.yyyy HH:mm"), booking.OperatorName)
             };

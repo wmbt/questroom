@@ -12,7 +12,13 @@
     });
 
     input.datepicker().on("changeDate", onDateChanged);
-    
+
+
+    $(".input-group.date.disabled").each(function() {
+        $(this).datepicker("remove");
+    });
+        
+
 });
 
 function onDateChanged(e) {

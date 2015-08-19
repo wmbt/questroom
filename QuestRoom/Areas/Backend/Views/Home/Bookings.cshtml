@@ -72,8 +72,22 @@
                         canConfirm = String.Empty;
                     }
                 }
-
-                <tr id="@b.Id">
+                
+                string rowClass;
+                switch (b.Status)
+                {
+                    case BookingStatus.Confirmed:
+                        rowClass = "row-confirmed";
+                        break;
+                    case BookingStatus.Canceled:
+                        rowClass = "row-canceled";
+                        break;
+                    default:
+                        rowClass = String.Empty;
+                        break;
+                }
+                
+                <tr id="@b.Id" class="@rowClass">
                     <td>@b.Id</td>
                     <td>@b.QuestName</td>
                     @*<td>@b.Date.ToString("dd.MM.yyyy")</td>*@

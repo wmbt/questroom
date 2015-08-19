@@ -20,7 +20,7 @@
                         attrs.Add("disabled", "disabled");
                     }
 
-                    if (t.Booked || (t.BeginTime < DateTime.Now.TimeOfDay && DateTime.Now.Date == Model.SelectedDate))
+                    if (!Model.QuestSchedule.Quest.Active || t.Booked || (t.BeginTime < DateTime.Now.TimeOfDay && DateTime.Now.Date == Model.SelectedDate))
                     {
                         <span class="btn btn-warning disabled">@text</span>
                     }

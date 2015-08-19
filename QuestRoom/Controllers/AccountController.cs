@@ -21,7 +21,8 @@ namespace QuestRoom.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToRoute("Default");
+            //return RedirectToRoute("Default");
+            return RedirectToAction("Index", "Booking", new {area = ""});
         }
 
         [HttpPost]

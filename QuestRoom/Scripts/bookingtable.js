@@ -32,6 +32,16 @@ function action(event) {
 
             row.find(".status").text(data.Status);
             row.find(".processed").text(data.Processed);
+
+            row.removeClass();
+            switch (data.StatusCode) {
+                case 1 /* Подтверждена */:
+                    row.addClass("row-confirmed");
+                    break;
+                case 2 /* Отменена */:
+                    row.addClass("row-canceled");
+                    break;
+            }
         },
         error: function(data) {
             
