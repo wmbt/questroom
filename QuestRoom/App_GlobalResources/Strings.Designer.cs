@@ -484,7 +484,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, такую же, как 911-5555555.
+        ///   Ищет локализованную строку, такую же, как 911-9416606.
         /// </summary>
         internal static string PhoneNmb {
             get {
