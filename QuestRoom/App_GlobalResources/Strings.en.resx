@@ -297,4 +297,13 @@
   <data name="QuestBooking" xml:space="preserve">
     <value>Quest booking</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="QuestAddress" xml:space="preserve">
+    <value>St. Petersburg, ul. Smolyachkova 14, building 4</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
 </root>

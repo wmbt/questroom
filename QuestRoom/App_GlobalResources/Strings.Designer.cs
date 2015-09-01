@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Адрес.
+        /// </summary>
+        internal static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Бронирование on-line.
         /// </summary>
         internal static string Book {
@@ -385,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Карта.
+        /// </summary>
+        internal static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как мин..
         /// </summary>
         internal static string Min {
@@ -525,6 +543,15 @@ namespace Resources {
         internal static string Quest {
             get {
                 return ResourceManager.GetString("Quest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как г. Санкт-Петербург , ул. Смолячкова д.14, корпус.4.
+        /// </summary>
+        internal static string QuestAddress {
+            get {
+                return ResourceManager.GetString("QuestAddress", resourceCulture);
             }
         }
         

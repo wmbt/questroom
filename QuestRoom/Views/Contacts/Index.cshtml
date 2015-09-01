@@ -1,42 +1,22 @@
-﻿@{
+﻿@using System.Threading
+@{
     ViewBag.Title = Resources.Strings.Contacts;
 }
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <h3 class="yellow">@Resources.Strings.Contacts</h3>
-        <p>Адрес: г. Санкт-Петербург , ул. Смолячкова д.14, корпус.4</p>
-        <p>Телефон: @Resources.Strings.PhoneNmb</p>
-        <h4 style="margin-top: 20px;">Как доехать:</h4>
-        <p>
-            <b>От ст.м. Выборская</b> (закрыта до конца 2015г.)<br/>
-            <ul>
-                <li>пешком 2 мин (190 м)</li>
-            </ul>
-        </p>
-        <p>
-            <b>От ст.м. Лесная</b><br/>
-            <ul>
-                <li>Трамвай №20 (остановка ст. метро Выборгская)</li>
-                <li>Трамвай №32 (остановка ст. метро Выборгская) – временный маршрут на время закрытия м. Выборгская</li>
-                <li>Трамвай №38 (остановка ст. метро Выборгская)</li>
-                <li>Маршрутка № 152</li>
-            </ul>
-        </p>
-        <p>
-            <b>От ст.м. Площадь Ленина (Финляндский вокзал)</b><br/>
-            <ul>
-                <li>Трамвай  №20 (остановка ст. метро Выборгская)</li>
-                <li>Трамвай №32 (остановка ст. метро Выборгская) – временный маршрут на время закрытия м. Выборгская</li>
-                <li>Трамвай №38 (остановка ст. метро Выборгская)</li>
-                <li>Автобус №14 (остановка ст. метро Выборгская)</li>
-                <li>Автобус №86 (остановка ст. метро Выборгская)</li>
-                <li>Автобус №52 (остановка ст. метро Выборгская) – временный маршрут на время закрытия м. Выборгская</li>
-                <li>Маршрутка № 152</li>
-                <li>Маршрутка № 367</li>
-            </ul>
-        </p>
-        <h4 style="margin-top: 20px;">Карта:</h4>
+        <p>@Resources.Strings.Address: @Resources.Strings.QuestAddress</p>
+        <p>@Resources.Strings.Phone: @Resources.Strings.PhoneNmb</p>
+
+        @{
+            var threadCulture = Thread.CurrentThread.CurrentCulture;
+            var viewPostfix = threadCulture.Name == "en-US" ? ".en" : string.Empty;
+        }
+        
+        @Html.Partial("_Contacts" + viewPostfix)
+
+        <h4 style="margin-top: 20px;">@Resources.Strings.Map:</h4>
         <div style="height: 450px;">
             <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=Ws2W3pTCUQjZsLI5RTARHVAQ0-em8Y5V&width=600&height=450"></script>
         </div>

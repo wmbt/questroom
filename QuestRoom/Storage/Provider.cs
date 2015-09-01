@@ -259,7 +259,7 @@ namespace QuestRoom.Storage
 
         public FeedbackMessage[] GetFeedbackMessages(int questId)
         {
-            var query = string.Format(MessagesQuery, "f.QuestId = @QuestId");
+            var query = string.Format(MessagesQuery, "f.QuestId = @QuestId and f.Status = 1");
             var items = GetItems(query, new SqlParameter("@QuestId", questId),x => new FeedbackMessage(x));
             return items.ToArray();
         }

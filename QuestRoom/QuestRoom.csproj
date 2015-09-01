@@ -250,6 +250,8 @@
     <Content Include="Views\Feedback\AddMessage.cshtml" />
     <Content Include="Views\Shared\_Schedule.cshtml" />
     <Content Include="Views\Quests\Index.cshtml" />
+    <Content Include="Views\Contacts\_Contacts.cshtml" />
+    <Content Include="Views\Contacts\_Contacts.en.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
