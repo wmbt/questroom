@@ -123,6 +123,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\logo-backend.png" />
+    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\q1.jpg" />
     <Content Include="Content\Images\q2.jpg" />
     <Content Include="Content\Images\q7.jpg" />

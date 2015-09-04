@@ -12,6 +12,7 @@ function action(event) {
         id = row.prop("id");
     $.ajax({
         url: "/backend/setmessagestatus",
+        cache: false,
         method: "GET",
         type: "JSON",
         data: {
@@ -20,7 +21,7 @@ function action(event) {
         },
         success: function(data) {
             if (button.hasClass("published")) 
-                $(".cancel").prop("banned", false);
+                row.find(".banned").prop("disabled", false);
             row.find(".status").text(data.Status);
             row.find(".processed").text(data.Processed);
         },
@@ -28,7 +29,7 @@ function action(event) {
             
         }
     });
-    $(".published").prop("disabled", true);
-    $(".banned").prop("disabled", true);
+    row.find(".published").prop("disabled", true);
+    row.find(".banned").prop("disabled", true);
     event.preventDefault();
 }

@@ -48,10 +48,9 @@ namespace QuestRoom.Areas.Backend.Controllers
             return View(model);
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult SetBookingStatus(int bookingId, BookingStatus status)
         {
-            Response.Cache.SetNoStore();
-
             var userId = int.Parse(User.Identity.Name);
             var booking = Provider.GetBooking(bookingId);
             if (booking.Status == BookingStatus.Canceled && status == BookingStatus.Confirmed)
@@ -85,6 +84,7 @@ namespace QuestRoom.Areas.Backend.Controllers
             return View(messages);
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult SetMessageStatus(int messageId, FeedbackMessageStatus status)
         {
             var userId = int.Parse(User.Identity.Name);

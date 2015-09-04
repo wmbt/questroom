@@ -27,8 +27,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.RouteLink("Fox-Quest", "Default", new { action = "Index", controller = "Booking" }, new { @class = "navbar-brand" })
-                @*<a class="navbar-brand" href="#">Quest Rooms</a>*@
+                @*@Html.RouteLink("Fox-Quest", "Default", new { action = "Index", controller = "Booking" }, new { @class = "navbar-brand" })*@
+                
+                <a class="navbar-brand" style="padding-top: 2px;" href="@Url.RouteUrl("Default", new { action = "Index", controller = "Booking" })">
+                    <img alt="Brand" src="~/Content/Images/logo.png">
+                </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 @Html.Partial("_NavMenu")

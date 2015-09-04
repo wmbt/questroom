@@ -1,6 +1,9 @@
 ﻿Hi, {0}!
-Yo booked quest "{1}" on {2}.
+Yo booked quest "{1}" on {2}. Game starts on {5}.
 Quest price {3} rub.
 {4} operator will contact you for confirmation. If
 you are unable to call during the day, the booking will be considered
 unconfirmed and your order will be canceled.
+
+http://www.fox-quest.ru
+Phone: {6}

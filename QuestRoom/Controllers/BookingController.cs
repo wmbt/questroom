@@ -117,7 +117,7 @@ namespace QuestRoom.Controllers
                     try
                     {
                         MessageToPlayer(model.Email, model.PlayerName, quest.Name, selectedDate + selectedTime, model.Price);
-                        MessageToAdmins();
+                        MessageToAdmins(quest.Name, selectedDate + selectedTime, model.PlayerName, model.Phone, model.Email, model.Note);
                     }
                     catch { }
                     return View("ConfirmResult", new ConfirmResultViewModel
@@ -215,16 +215,24 @@ namespace QuestRoom.Controllers
 
             var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/" + fileName));
             var confirmDate = questTime.Date == DateTime.Now.Date ? DateTime.Now.Date : questTime.Date.AddDays(-1);
-            var body = string.Format(bodyTemplate, playername, questName, questTime.ToString("d MMMM yyyy"), price, confirmDate.ToString("d MMMM"));
+            var body = string.Format(bodyTemplate, 
+                playername, 
+                questName, 
+                questTime.ToString("d MMMM yyyy"), 
+                price, 
+                confirmDate.ToString("d MMMM"),
+                questTime.ToString("t"),
+                Resources.Strings.PhoneNmb);
             var subject = string.Format(Resources.Strings.QuestBooking + " \"{0}\"", questName);
             SendEmail(body, subject, new [] { email});
         }
 
-        private void MessageToAdmins()
+        private void MessageToAdmins(string questName, DateTime questDateTime, string playerName, string playerPhone, string playerEmail, string bComment)
         {
-            var body = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/MessageToAdmin.txt"));
+            var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/MessageToAdmin.txt"));
             var subject = "Новое бронирование";
             var emails = Provider.GetUsersEmails();
+            var body = string.Format(bodyTemplate, questName, questDateTime.ToString("f"), playerName, playerPhone, playerEmail, bComment);
             SendEmail(body, subject, emails);
         }
 
