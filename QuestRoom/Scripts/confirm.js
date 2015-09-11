@@ -1,9 +1,11 @@
 ﻿$(document).ready(function() {
     $("#cost").val($("#priceSelector").val());
+    $("#persons").val($("#priceSelector option:selected").text());
 
     $("#priceSelector").change(function (e) {
         var value = $(this).val();
         $("#cost").val(value);
+        $("#persons").val($("#priceSelector option:selected").text());
     });
 });
 

@@ -20,6 +20,7 @@ namespace QuestRoom.Types
         public string OperatorName { get; set; }
         public DateTime? Processed { get; set; }
         public int Cost { get; set; }
+        public string Persons { get; set; }
 
         public Booking(IDataRecord dr)
         {
@@ -37,6 +38,7 @@ namespace QuestRoom.Types
             OperatorName = dr.GetValueOrDefault<string>("OperatorName");
             Processed = dr.GetValueOrDefault<DateTime?>("Processed");
             Cost = dr.GetValueOrDefault<int>("Cost");
+            Persons = dr.GetValueOrDefault<string>("Persons");
         }
     }
 }

@@ -153,6 +153,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Areas\Backend\Views\Promo\Index.cshtml" />
     <None Include="Properties\PublishProfiles\QuestRoom.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -194,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Backend\Controllers\PromoController.cs" />
     <Compile Include="Areas\Backend\Models\BookingsByEmailViewModel.cs" />
     <Compile Include="Areas\Backend\Models\BookingsViewModel.cs" />
     <Compile Include="Controllers\AboutController.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="Models\QuestScheduleViewModel.cs" />
     <Compile Include="Types\Booking.cs" />
     <Compile Include="Types\FeedbackMessageStatus.cs" />
+    <Compile Include="Types\Promocode.cs" />
     <Compile Include="Types\QuestSchedule.cs" />
     <Compile Include="Models\SchedulesViewModel.cs" />
     <Compile Include="Models\ConfirmViewModel.cs" />

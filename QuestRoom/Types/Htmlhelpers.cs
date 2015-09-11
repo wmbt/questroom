@@ -32,13 +32,15 @@ namespace QuestRoom.Types
 
         }
 
-        public static MvcHtmlString Stars(this HtmlHelper htmlHelper, int count)
+        public static MvcHtmlString Stars(this HtmlHelper htmlHelper, int count, int maxCount = 4)
         {
             var sb = new StringBuilder();
-            
-            for (var i = 0; i < count; i++)
+
+            for (var i = 0; i < maxCount; i++)
             {
-                sb.Append("<span class=\"glyphicon glyphicon-star\"></span>");
+                sb.Append(i <= count - 1
+                    ? "<span class=\"glyphicon glyphicon-star\"></span>"
+                    : "<span class=\"glyphicon glyphicon-star inactive\"></span>");
             }
             return new MvcHtmlString(sb.ToString());
         }

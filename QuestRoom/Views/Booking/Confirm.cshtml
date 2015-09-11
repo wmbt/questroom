@@ -33,6 +33,7 @@
                     <script type="text/javascript">
                         window.costs = @Html.Raw(JsonConvert.SerializeObject(Model.Prices));
                     </script>
+                    @Html.HiddenFor(x => x.Persons, new {id = "persons"})
                 </div>
                 <div class="form-group col-md-4">
                     <label for="cost">@Resources.Strings.Price</label>

@@ -94,7 +94,8 @@ namespace QuestRoom.Controllers
                 model.PlayerName, 
                 model.Phone, 
                 model.Email, 
-                model.Note);
+                model.Note,
+                model.Persons);
 
             switch (result)
             {
@@ -117,7 +118,7 @@ namespace QuestRoom.Controllers
                     try
                     {
                         MessageToPlayer(model.Email, model.PlayerName, quest.Name, selectedDate + selectedTime, model.Price);
-                        MessageToAdmins(quest.Name, selectedDate + selectedTime, model.PlayerName, model.Phone, model.Email, model.Note);
+                        MessageToAdmins(quest.Name, selectedDate + selectedTime, model.PlayerName, model.Phone, model.Email, model.Note, model.Price, model.Persons);
                     }
                     catch { }
                     return View("ConfirmResult", new ConfirmResultViewModel
@@ -227,12 +228,12 @@ namespace QuestRoom.Controllers
             SendEmail(body, subject, new [] { email});
         }
 
-        private void MessageToAdmins(string questName, DateTime questDateTime, string playerName, string playerPhone, string playerEmail, string bComment)
+        private void MessageToAdmins(string questName, DateTime questDateTime, string playerName, string playerPhone, string playerEmail, string bComment, double price, string persons)
         {
             var bodyTemplate = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/MessageToAdmin.txt"));
             var subject = "Новое бронирование";
             var emails = Provider.GetUsersEmails();
-            var body = string.Format(bodyTemplate, questName, questDateTime.ToString("f"), playerName, playerPhone, playerEmail, bComment);
+            var body = string.Format(bodyTemplate, questName, questDateTime.ToString("f"), playerName, playerPhone, playerEmail, bComment, price, persons);
             SendEmail(body, subject, emails);
         }
 

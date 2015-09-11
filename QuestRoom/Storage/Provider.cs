@@ -20,7 +20,7 @@ namespace QuestRoom.Storage
 
         private const string BookingsQuery = "SELECT b.Id, b.QuestId, q.Name as QuestName, b.Date, b.PlayerName, " +
                                              "b.Email, b.Phone, b.Comment, b.Status, b.Created, " +
-                                             "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost " +
+                                             "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost, b.Persons " +
                                              "FROM Quests q, Bookings b " +
                                              "left join Users u on u.Id = b.OperatorId " +
                                              "where {0} and b.QuestId = q.Id " +
@@ -40,6 +40,37 @@ namespace QuestRoom.Storage
         {
             ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ConnectionString;
         }
+
+        public Promocode[] GetPromocodes()
+        {
+            const string query = "select * from promocodes";
+            var result = GetItems(query, x => new Promocode(x));
+            return result.ToArray();
+        }
+
+        public Promocode GetPromocode(string code = "")
+        {
+            const string query = "select * from promocodes where lower(ltrim(rtrim(Code))) = lower(ltrim(rtrim(@Code)))";
+            var result = GetItems(query, new SqlParameter("@Code", code), record => new Promocode(record)).SingleOrDefault();
+            return result;
+        }
+
+        public void RemovePromocode(int promocodeId)
+        {
+            const string query = "delete from promocodes where id = @id";
+            ExecuteNonQuery(query, new SqlParameter("@id", promocodeId));
+        }
+
+        public void AddPromocode(string code, double factor)
+        {
+            const string query = "insert into promocodes(code, factor) values(@code, @factor)";
+            ExecuteNonQuery(query, new[]
+            {
+                new SqlParameter("@code", code), 
+                new SqlParameter("@factor", factor)
+            });
+        }
+        
         public string[] GetUsersEmails()
         {
             const string query = "select distinct lower(LTRIM(RTRIM(u.Email))) as Email from Users u where u.Active = 1";
@@ -76,7 +107,7 @@ namespace QuestRoom.Storage
             const string query =
                 "SELECT b.Id, b.QuestId, q.Name as QuestName, b.Date, b.PlayerName, " +
                         "b.Email, b.Phone, b.Comment, b.Status, b.Created, " +
-                        "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost " +
+                        "b.OperatorId, u.Name as OperatorName, b.Processed, b.Cost, b.Persons " +
                 "FROM Quests q, Bookings b " +
                 "left join Users u on u.Id = b.OperatorId " +
                 "where b.Id = @Id and b.QuestId = q.Id";
@@ -177,7 +208,7 @@ namespace QuestRoom.Storage
                                                 string name, 
                                                 string phone, 
                                                 string email, 
-                                                string comments)
+                                                string comments, string persons)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -206,7 +237,7 @@ namespace QuestRoom.Storage
                     return ProcessBookingStatus.Booked;
 
                 const string query =
-                    "insert into Bookings(QuestId, Date, Cost, PlayerName, Email, Phone, Comment) values(@QuestId, @Date, @Cost, @PlayerName, @Email, @Phone, @Comment)";
+                    "insert into Bookings(QuestId, Date, Cost, PlayerName, Email, Phone, Comment, Persons) values(@QuestId, @Date, @Cost, @PlayerName, @Email, @Phone, @Comment, @Persons)";
                 var addBookingCommand = new SqlCommand(query, conn, trn);
                 addBookingCommand.Parameters.AddRange(new[]
                 {
@@ -216,7 +247,8 @@ namespace QuestRoom.Storage
                     new SqlParameter("@PlayerName", name),
                     new SqlParameter("@Email", email),
                     new SqlParameter("@Phone", phone),
-                    new SqlParameter("@Comment", comments ?? (object)DBNull.Value)
+                    new SqlParameter("@Comment", comments ?? (object)DBNull.Value),
+                    new SqlParameter("@Persons", persons ?? (object)DBNull.Value)
                 });
                 addBookingCommand.ExecuteNonQuery();
                 trn.Commit();
@@ -368,6 +400,7 @@ namespace QuestRoom.Storage
             var postfix = threadCulture.Name == "en-US" ? EngCulturePostfix : string.Empty;
             return query.Replace("__", postfix);
         }
+        
         
     }
 }

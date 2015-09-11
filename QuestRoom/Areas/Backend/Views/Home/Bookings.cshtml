@@ -36,6 +36,8 @@
                 <th>Квест</th>
                 <th>Время</th>
                 @*<th>Время</th>*@
+                <th>Количество игроков</th>
+                <th>Стоимость, руб.</th>
                 <th>Имя</th>
                 <th>Email</th>
                 <th>Телефон</th>
@@ -94,6 +96,8 @@
                     <td>@b.QuestName</td>
                     @*<td>@b.Date.ToString("dd.MM.yyyy")</td>*@
                     <td>@b.Date.ToString("HH:mm")</td>
+                    <td>@b.Persons</td>
+                    <td>@b.Cost</td>
                     <td>@b.PlayerName</td>
                     <td>@Html.RouteLink(b.Email, "Backend", new{ email = b.Email, action = "BookingsByEmail" }) </td>
                     <td>@b.Phone</td>
